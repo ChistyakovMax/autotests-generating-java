@@ -1,2 +1,2 @@
-Click AccountScreen.Popup_OK_Button
-Click AccountScreen.Settings_Button
+Click AccountScreen.button1
+Tap AccountScreen.button2
