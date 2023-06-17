@@ -1,4 +1,4 @@
-package ru.example.templates;
+package ru.example.other;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
+
+import ru.example.freemaker.ClassTemplateLoaderDemo;
 
 public class TestCaseTemplate {
     private static Map<String,String> actionsAndMethods = createActionsAndMethodsHashMap();
@@ -31,36 +31,31 @@ public class TestCaseTemplate {
                 .append(" ")
                 .append(action)
                 .append(element)
-                .append("() {\n")
+                .append("() {\n\t\t")
                 .append(element)
                 .append(getMethodFromAction(action))
-                .append("\n}\n")
+                .append(";\n\t}\n")
                 .toString();
     }
 
-    public static List<String> getTestCase() {
+    public static List<String> getTestCase() throws Exception {
         //read file test1.txt
         String filePath = "src/main/resources/manual_tests/test1.txt";
         String fileContent = "";
-        try {
-            fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+
 
         //return list of actions
         List<String> steps = Arrays.asList(fileContent.split("\n"));
 
         StringBuilder newSteps = new StringBuilder();
         //for each action generate Step code
-        for (String str: steps) {
-            String action = str.split(" ")[0];
-            String screenAndAction = str.split(" ")[1];
+        for (String step: steps) {
+            String action = step.split(" ")[0];
+            String screen = step.split(" ")[1].split("\\.")[0];
+            String element = step.split(" ")[1].split("\\.")[1];
 
-            String screen = screenAndAction.split("\\.")[0];
-            String element = screenAndAction.split("\\.")[1];
-
-            String step = (getStepTemplate(screen, element, action));
+            String stepMethod = getStepTemplate(screen, element, action);
             Path fileScreenPath = Paths.get("src/main/java/ru/example/screens" + screen + ".java");
 
             if (Files.exists(fileScreenPath)){
@@ -72,14 +67,11 @@ public class TestCaseTemplate {
                 }
                 screenFileContent
                         .append("\n")
-                        .append(step);
+                        .append(stepMethod);
 
             }
             else {
-                Configuration cfg = new Configuration(Configuration.VERSION_2_3_27);
-                Map<String, Object> root = new HashMap<>();
-                root.put("className", screen);
-                root.put("classFilling", step);
+                ClassTemplateLoaderDemo.createTestClassByTemplate(screen, stepMethod);
             }
 
         }
@@ -91,7 +83,7 @@ public class TestCaseTemplate {
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         //System.out.println(getStepTemplate("ScreenA", "elementX", "Click"));
         getTestCase();
     }
