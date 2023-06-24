@@ -34,17 +34,4 @@ public class TestClassFileWriter {
 
         return sb.toString();
     }
-
-    public static String addFillingToMethodOld(String method, String filling) {
-        StringBuilder sb = new StringBuilder();
-
-        sb.append(method);
-        int lastCLosingBracketIndex = sb.lastIndexOf("}");
-        sb.deleteCharAt(lastCLosingBracketIndex)
-                .append(filling)
-                .append("\n\t}");
-
-        return sb.toString();
-    }
-
 }
