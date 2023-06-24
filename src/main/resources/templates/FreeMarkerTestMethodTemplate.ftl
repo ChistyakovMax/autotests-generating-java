@@ -1,3 +1,3 @@
-public ${returnType} ${name}() {
-		${element}.${action}();
-}
+    public ${screen} ${action+element}() {
+	    ${element}.${action}();
+    }

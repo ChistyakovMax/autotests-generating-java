@@ -1,4 +1,4 @@
-package ru.example.other;
+package ru.example.generator;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

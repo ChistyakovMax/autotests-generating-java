@@ -1,4 +1,4 @@
-package ru.example.other;
+package ru.example.generator;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -25,13 +25,12 @@ public class TestCaseTemplate {
             String screen = step.split(" ")[1].split("\\.")[0];
             String element = step.split(" ")[1].split("\\.")[1];
 
-            String stepMethod = TestClassTemplateLoader.getStepTemplate(screen, element, action);
+            String stepMethod = TestClassTemplateLoader.getStepByTemplate(screen, element, action);
             Path fileScreenPath = Paths.get("src/main/java/ru/example/screens/" + screen + ".java");
 
             if (Files.exists(fileScreenPath)) {
                 TestClassFileWriter.writeToFile(stepMethod, fileScreenPath);
             } else TestClassTemplateLoader.createTestClassByTemplate(screen, stepMethod);
-
 
         }
 

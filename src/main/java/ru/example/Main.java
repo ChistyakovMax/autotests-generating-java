@@ -1,6 +1,6 @@
 package ru.example;
 
-import ru.example.other.TestCaseTemplate;
+import ru.example.generator.TestCaseTemplate;
 
 public class Main {
     public static void main(String[] args) throws Exception {

@@ -2,6 +2,7 @@ package ru.example.freemaker;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +13,8 @@ public class TestClassTemplateLoader {
 
     private static Map createActionsAndMethodsHashMap() {
         Map<String, String> map = new HashMap<>();
-        map.put("click", ".click()");
-        map.put("tap", ".click()");
+        map.put("click", "click");
+        map.put("tap", "click");
 
         return map;
     }
@@ -53,7 +54,7 @@ public class TestClassTemplateLoader {
     private static String getMethodFromAction(String action) {
         return actionsAndMethods.get(action.toLowerCase());
     }
-    public static String getStepTemplate(String screen, String element, String action) {
+    public static String getStep(String screen, String element, String action) {
         return new StringBuilder().append("\tpublic ")
                 .append(screen)
                 .append(" ")
@@ -65,4 +66,23 @@ public class TestClassTemplateLoader {
                 .append(";\n\t}")
                 .toString();
     }
+
+    public static String getStepByTemplate(String screen, String element, String action)
+            throws Exception {
+        cfg = ConfigurationUtil.getConfiguration();
+        Map<String, Object> map = new HashMap<>();
+        map.put("screen", screen);
+        map.put("element", element);
+        map.put("action", getMethodFromAction(action));
+
+        Template template = cfg.getTemplate("FreeMarkerTestMethodTemplate.ftl");
+
+        // write the freemarker output to a StringWriter
+        StringWriter stringWriter = new StringWriter();
+        template.process(map, stringWriter);
+
+        // get the String from the StringWriter
+        return stringWriter.toString();
+    }
+
 }
