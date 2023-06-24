@@ -1,1 +1,1 @@
-    assertEquals(${expected}, ${screen}.${element}.getText());
+assertEquals(${expected}, ${screen}.${element}.getText());

@@ -1,1 +1,1 @@
-    assertThat(${screen}.${element}).isDisplayed(5);
+assertThat(${screen}.${element}).isDisplayed(5);
