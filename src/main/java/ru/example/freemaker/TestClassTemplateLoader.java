@@ -6,10 +6,12 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+
 public class TestClassTemplateLoader {
-    private static Map<String,String> actionsAndMethods = createActionsAndMethodsHashMap();
+    private static final Map<String, String> actionsAndMethods = createActionsAndMethodsHashMap();
 
     private static Map createActionsAndMethodsHashMap() {
         Map<String, String> map = new HashMap<>();
@@ -40,7 +42,7 @@ public class TestClassTemplateLoader {
 
         Template template = cfg.getTemplate("FreeMarkerScreenClassTemplate.ftl");
         //File output
-        Writer file = new FileWriter (new File("src/main/java/ru/example/screens/" + className + ".java"));
+        Writer file = new FileWriter("src/main/java/ru/example/screens/" + className + ".java");
         template.process(map, file);
         file.flush();
         file.close();
@@ -53,12 +55,12 @@ public class TestClassTemplateLoader {
         map.put("element", element);
         map.put("action", getMethodFromAction(action));
 
-        switch (getMethodFromAction(action)){
+        switch (getMethodFromAction(action)) {
             case "sendKeys":
                 map.put("parameter", ("\"" + step.split(" ")[3]) + "\"");
                 break;
 
-            case "click" :
+            case "click":
             default:
                 map.put("parameter", "");
                 map.put("parameterType", "");

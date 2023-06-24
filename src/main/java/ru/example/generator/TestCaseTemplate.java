@@ -13,8 +13,7 @@ public class TestCaseTemplate {
     public static void generateTestCase() throws Exception {
         //read file test1.txt
         String filePath = "src/main/resources/manual_tests/test1.txt";
-        String fileContent = "";
-        fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
 
         //return list of actions
         List<String> steps = Arrays.asList(fileContent.split("\n"));
@@ -24,7 +23,7 @@ public class TestCaseTemplate {
             String step = steps.get(i);
 
             String action = step.split(" ")[0];
-            if(action.equals("Assert")) continue;
+            if (action.equals("Assert")) continue;
             String screen = step.split(" ")[1].split("\\.")[0];
             String element = step.split(" ")[1].split("\\.")[1];
 
@@ -49,6 +48,7 @@ public class TestCaseTemplate {
     public static boolean stepIsAssert(String step) {
         return step.split(" ")[0].equals("Assert");
     }
+
     public static String addAssertForMethod(String stepMethod, String checkedStep) throws Exception {
         String assertion = TestClassTemplateLoader.getAssertByTemplate(checkedStep);
         stepMethod = TestClassFileWriter.addFillingToMethod(stepMethod, assertion);
