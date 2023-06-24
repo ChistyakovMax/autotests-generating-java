@@ -1,1 +1,0 @@
-assertEquals(${expected}, ${actual});

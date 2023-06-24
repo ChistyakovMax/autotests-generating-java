@@ -34,26 +34,39 @@ public class TestClassTemplateLoader {
             file.close();
     }
 
-    public static void createTestMethodByTemplate(String returnType, String name, String element, String action)
-            throws Exception {
-            cfg = ConfigurationUtil.getConfiguration();
-            Map<String, Object> map = new HashMap<>();
-            map.put("returnType", returnType);
-            map.put("name", name);
-            map.put("element", element);
-            map.put("action", action);
+    public static String getStepByTemplate(String screen, String element, String action) throws Exception {
+        cfg = ConfigurationUtil.getConfiguration();
+        Map<String, Object> map = new HashMap<>();
+        map.put("screen", screen);
+        map.put("element", element);
+        map.put("action", getMethodFromAction(action));
 
-            Template template = cfg.getTemplate("FreeMarkerTestMethodTemplate.ftl");
-            //File output
-            Writer file = new FileWriter (new File("template-output.html"));
-            template.process(map, file);
-            file.flush();
-            file.close();
+        Template template = cfg.getTemplate("FreeMarkerTestMethodTemplate.ftl");
+
+        StringWriter stringWriter = new StringWriter();
+        template.process(map, stringWriter);
+
+        return stringWriter.toString();
     }
 
-    private static String getMethodFromAction(String action) {
-        return actionsAndMethods.get(action.toLowerCase());
+    public static String getAssertEqualsByTemplate(String screen, String expected, String element) throws Exception {
+        cfg = ConfigurationUtil.getConfiguration();
+        Map<String, Object> map = new HashMap<>();
+        map.put("screen", screen);
+        map.put("expected", expected);
+        map.put("element", element);
+
+        Template template = cfg.getTemplate("FreeMakerAssertEqualsTemplate.ftl");
+
+        StringWriter stringWriter = new StringWriter();
+        template.process(map, stringWriter);
+
+        return stringWriter.toString();
     }
+
+
+
+
     public static String getStep(String screen, String element, String action) {
         return new StringBuilder().append("\tpublic ")
                 .append(screen)
@@ -67,22 +80,8 @@ public class TestClassTemplateLoader {
                 .toString();
     }
 
-    public static String getStepByTemplate(String screen, String element, String action)
-            throws Exception {
-        cfg = ConfigurationUtil.getConfiguration();
-        Map<String, Object> map = new HashMap<>();
-        map.put("screen", screen);
-        map.put("element", element);
-        map.put("action", getMethodFromAction(action));
-
-        Template template = cfg.getTemplate("FreeMarkerTestMethodTemplate.ftl");
-
-        // write the freemarker output to a StringWriter
-        StringWriter stringWriter = new StringWriter();
-        template.process(map, stringWriter);
-
-        // get the String from the StringWriter
-        return stringWriter.toString();
+    private static String getMethodFromAction(String action) {
+        return actionsAndMethods.get(action.toLowerCase());
     }
 
 }

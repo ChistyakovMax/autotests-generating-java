@@ -1,2 +1,3 @@
 Click AccountScreen.button1
 Tap AccountScreen.button2
+Assert AccountNavButton.field1 equals value
