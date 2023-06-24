@@ -28,9 +28,16 @@ public class TestCaseTemplate {
             String screen = step.split(" ")[1].split("\\.")[0];
             String element = step.split(" ")[1].split("\\.")[1];
 
-            String stepMethod = TestClassTemplateLoader.getStepByTemplate(screen, element, action);
-            stepMethod = checkStepForAssert(steps,  i, stepMethod);
+            String stepMethod = TestClassTemplateLoader.getStepByTemplate(screen, element, action, step);
 
+            for (int j = i + 1; j < steps.size(); j++) {
+                String checkedStep = steps.get(j);
+                if (!stepIsAssert(checkedStep)) {
+                    break;
+                }
+                stepMethod = addAssertForMethod(stepMethod, checkedStep);
+                i++;
+            }
 
             Path fileScreenPath = Paths.get("src/main/java/ru/example/screens/" + screen + ".java");
             if (Files.exists(fileScreenPath)) {
@@ -39,21 +46,12 @@ public class TestCaseTemplate {
         }
     }
 
-    public static String checkStepForAssert(List<String> steps, int i, String stepMethod) throws Exception {
-        if (!(i + 1 == steps.size())){
-            i++;
-            String step = steps.get(i);
-            String action = step.split(" ")[0];
-            //if it is Assert add assert to method
-            if(action.equals("Assert")){
-                String expected = step.split(" ")[3];
-                String screen = step.split(" ")[1].split("\\.")[0];
-                String element = step.split(" ")[1].split("\\.")[1];
-
-                String assertion = TestClassTemplateLoader.getAssertEqualsByTemplate(screen, expected, element);
-                stepMethod = TestClassFileWriter.addFillingToMethod(stepMethod, assertion);
-            }
-        }
+    public static boolean stepIsAssert(String step) {
+        return step.split(" ")[0].equals("Assert");
+    }
+    public static String addAssertForMethod(String stepMethod, String checkedStep) throws Exception {
+        String assertion = TestClassTemplateLoader.getAssertByTemplate(checkedStep);
+        stepMethod = TestClassFileWriter.addFillingToMethod(stepMethod, assertion);
 
         return stepMethod;
     }
