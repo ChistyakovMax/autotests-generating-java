@@ -90,7 +90,7 @@ public class TestClassTemplateLoader {
                 template = cfg.getTemplate("FreeMakerAssertThatIsDisplayedTemplate.ftl");
                 break;
             case "equals":
-                map.put("expected", step.split(" ")[3]);
+                map.put("expected", ("\"" + step.split(" ")[3]) + "\"");
                 template = cfg.getTemplate("FreeMakerAssertEqualsTemplate.ftl");
                 break;
 
