@@ -1,11 +1,12 @@
 package ru.example.freemaker;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -33,16 +34,33 @@ public class TestClassTemplateLoader {
     static Configuration cfg;
     static Template template;
 
-    public static void createTestClassByTemplate(String className, String classFilling) throws Exception {
+    public static void createPageObjectClassByTemplate(String className, String classFilling) throws Exception {
         cfg = ConfigurationUtil.getConfiguration();
 
         Map<String, Object> map = new HashMap<>();
         map.put("className", className);
         map.put("classFilling", classFilling);
 
-        Template template = cfg.getTemplate("FreeMarkerScreenClassTemplate.ftl");
+        template = cfg.getTemplate("FreeMarkerScreenClassTemplate.ftl");
         //File output
         Writer file = new FileWriter("src/main/java/ru/example/screens/" + className + ".java");
+        template.process(map, file);
+        file.flush();
+        file.close();
+    }
+
+    public static void createTestCaseClassByTemplate(String testNumber, String testCaseSteps, Set<String> testCaseScreensSet)
+            throws Exception {
+        String testCaseScreens = String.join("\n\t", testCaseScreensSet);
+
+        cfg = ConfigurationUtil.getConfiguration();
+        Map<String, Object> map = new HashMap<>();
+        map.put("testNumber", testNumber);
+        map.put("testCaseSteps", testCaseSteps);
+        map.put("testCaseScreens", testCaseScreens);
+
+        template = cfg.getTemplate("FreeMakerAutotestTemplate.ftl");
+        Writer file = new FileWriter("src/test/java/ru/example/freemaker/tests/TestCase" + testNumber + ".java");
         template.process(map, file);
         file.flush();
         file.close();
@@ -72,7 +90,6 @@ public class TestClassTemplateLoader {
         template.process(map, stringWriter);
 
         return stringWriter.toString();
-
     }
 
     public static String getAssertByTemplate(String step) throws Exception {
@@ -101,5 +118,18 @@ public class TestClassTemplateLoader {
         template.process(map, stringWriter);
 
         return stringWriter.toString();
+    }
+
+    public static String getTestStep(String screen, String action, String element) {
+        StringBuilder testStep = new StringBuilder();
+        testStep.append(screen.substring(0, 1).toLowerCase())
+                .append(screen.substring(1))
+                .append(".")
+                .append(getMethodFromAction(action))
+                .append("_")
+                .append(element)
+                .append("();\n\t\t");
+
+        return testStep.toString();
     }
 }
