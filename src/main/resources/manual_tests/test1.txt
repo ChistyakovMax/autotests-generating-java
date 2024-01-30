@@ -1,7 +1,8 @@
+TestCase 101
 Click SearchScreen.searchBar
 fill SearchScreen.searchBar with t-shirt
 Assert SearchScreen.cancelButton is_visible
 Click SearchScreen.searchButton
 Assert SearchResultScreen.searchResultText is_visible
-Assert SearchResultScreen.searchResultText equals "t-shirt"
-Click SearchScreen.anotherButton
+Assert SearchResultScreen.searchResultText equals t-shirt
+Click SearchScreen.orderButton
