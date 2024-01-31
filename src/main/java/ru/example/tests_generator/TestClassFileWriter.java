@@ -1,4 +1,4 @@
-package ru.example.generator;
+package ru.example.tests_generator;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

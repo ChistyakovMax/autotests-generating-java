@@ -1,0 +1,7 @@
+---
+pages:
+  - pageName: Login
+    elements:
+      - elementName: Submit
+        type: BUTTON
+        locator: "/buttton[@id='qwe']"
