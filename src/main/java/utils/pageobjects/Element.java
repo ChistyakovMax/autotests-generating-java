@@ -6,11 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Element {
-    private String elementName;
-    public enum ElementType {
-        BUTTON,
-        INPUT,
-        TEXTFIELD
-    };
+    private String name;
+    private String type;
     private String locator;
 }

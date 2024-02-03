@@ -1,17 +1,17 @@
 package ru.example.pages_generator;
 
 import org.yaml.snakeyaml.Yaml;
-import ru.example.models.Customer;
+import utils.pageobjects.Pages;
+
 import java.io.InputStream;
 
 public class PagesGenerator {
 
-    public void generatePageObject() {
+    public Pages getPagesFromYAML() {
         Yaml yaml = new Yaml();
-        InputStream iStream = this.getClass().getClassLoader().getResourceAsStream("pages/customer.yaml");
-//      Map<String, Object> obj = yaml.load(iStream);
+        InputStream iStream = this.getClass().getClassLoader().getResourceAsStream("pages/pages.yaml");
+        Pages pages = yaml.loadAs(iStream, Pages.class);
 
-        Customer customer = yaml.loadAs(iStream, Customer.class);
-        System.out.println(customer.getLastName());
+        return pages;
     }
 }
