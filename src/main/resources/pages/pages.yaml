@@ -2,14 +2,14 @@
 pages:
   - pageName: Login
     elements:
-      - name: Submit
-        type: BUTTON
-        locator: "/buttton[@id='qwe']"
+      - elementName: Submit
+        elementType: BUTTON
+        elementLocator: "/buttton[@id='qwe']"
   - pageName: Login2
     elements:
-      - name: Submit21
-        type: BUTTON21
-        locator: "/buttton[@id='qwe']21"
-      - name: Submit22
-        type: BUTTON22
-        locator: "/buttton[@id='qwe']22"
+      - elementName: Submit21
+        elementType: BUTTON21
+        elementLocator: "/buttton[@id='qwe']21"
+      - elementName: Submit22
+        elementType: BUTTON22
+        elementLocator: "/buttton[@id='qwe']22"

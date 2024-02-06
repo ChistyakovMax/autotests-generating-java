@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Element {
-    private String name;
-    private String type;
-    private String locator;
+    private String elementName;
+    private String elementType;
+    private String elementLocator;
 }

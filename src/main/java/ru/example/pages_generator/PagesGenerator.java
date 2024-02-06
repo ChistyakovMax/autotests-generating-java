@@ -7,11 +7,15 @@ import java.io.InputStream;
 
 public class PagesGenerator {
 
-    public Pages getPagesFromYAML() {
+    private Pages getPagesFromYAML() {
         Yaml yaml = new Yaml();
         InputStream iStream = this.getClass().getClassLoader().getResourceAsStream("pages/pages.yaml");
-        Pages pages = yaml.loadAs(iStream, Pages.class);
 
-        return pages;
+        return yaml.loadAs(iStream, Pages.class);
+    }
+
+    public void generatePageObjectClass() {
+        Pages pages = getPagesFromYAML();
+        System.out.println(pages.getPages().get(1).getElements().size());
     }
 }
