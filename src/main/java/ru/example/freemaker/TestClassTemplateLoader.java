@@ -41,7 +41,7 @@ public class TestClassTemplateLoader {
         map.put("className", className);
         map.put("classFilling", classFilling);
 
-        template = cfg.getTemplate("FreeMarkerScreenClassTemplate.ftl");
+        template = cfg.getTemplate("FreeMakerScreenClassTemplate.ftl");
         //File output
         Writer file = new FileWriter("src/main/java/ru/example/screens/" + className + ".java");
         template.process(map, file);
@@ -84,7 +84,7 @@ public class TestClassTemplateLoader {
                 map.put("parameterType", "");
         }
 
-        template = cfg.getTemplate("FreeMarkerTestMethodTemplate.ftl");
+        template = cfg.getTemplate("FreeMakerTestMethodTemplate.ftl");
 
         StringWriter stringWriter = new StringWriter();
         template.process(map, stringWriter);

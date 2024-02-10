@@ -1,10 +1,14 @@
 package ru.example;
 
-import ru.example.pages_generator.PagesGenerator;
+import ru.example.generator.page.PageGenerator;
 
 public class Main {
     public static void main(String[] args) {
-        PagesGenerator pg = new PagesGenerator();
-        pg.generatePageObjectClass();
+        PageGenerator pg = new PageGenerator();
+        try {
+            pg.generatePageObjectClass();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

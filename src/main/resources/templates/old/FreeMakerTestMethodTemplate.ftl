@@ -1,4 +1,4 @@
-    public ${screen} ${action}${element}${elementType}() {
+    public ${screen} ${action}${element}() {
 	    ${element}.${action}(${parameter});
 
 	    return this;

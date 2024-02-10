@@ -4,12 +4,7 @@ pages:
     elements:
       - elementName: Submit
         elementType: BUTTON
-        elementLocator: "/buttton[@id='qwe']"
-  - pageName: Login2
-    elements:
-      - elementName: Submit21
-        elementType: BUTTON21
-        elementLocator: "/buttton[@id='qwe']21"
-      - elementName: Submit22
-        elementType: BUTTON22
-        elementLocator: "/buttton[@id='qwe']22"
+        elementLocator: "/button[@id='qwe']"
+      - elementName: SubmitNEW
+        elementType: BUTTON
+        elementLocator: "/button[@id='qweNEW']"

@@ -1,4 +1,4 @@
-package utils.pageobjects;
+package utils.pageobject.yaml;
 
 import lombok.Getter;
 import lombok.Setter;
