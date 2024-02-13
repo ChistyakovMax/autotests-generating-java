@@ -1,6 +1,7 @@
 package ru.example.generator.page;
 
 import org.yaml.snakeyaml.Yaml;
+import ru.example.filewriter.FileCreator;
 import ru.example.generator.TemplateGenerator;
 import ru.example.generator.step.StepGenerator;
 import ru.example.generator.webelement.WebElementGenerator;
@@ -59,8 +60,9 @@ public class PageGenerator {
             elementsForTemplate.put("webElements", webElements);
             elementsForTemplate.put("steps", steps);
 
-            String generatedPage = TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
-            System.out.println(generatedPage);
+            String pageObject = TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
+            System.out.println(pageObject);
+            FileCreator.createPageObjectClass(pageObject, pageName);
         }
     }
 }

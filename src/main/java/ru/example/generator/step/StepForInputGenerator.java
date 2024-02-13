@@ -23,7 +23,7 @@ public class StepForInputGenerator {
     }
 
     private String generateFillingStepForInput(Element element, String pageName) throws Exception {
-        templateFilePath = "FreeMakerInputFillingTemplate.ftl";
+        templateFilePath = "actions/input/FreeMakerInputFillingTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -33,7 +33,7 @@ public class StepForInputGenerator {
     }
 
     private String generateClearingStepForInput(Element element, String pageName) throws Exception {
-        templateFilePath = "FreeMakerInputClearingTemplate.ftl";
+        templateFilePath = "actions/input/FreeMakerInputClearingTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());

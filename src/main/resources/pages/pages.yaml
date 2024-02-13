@@ -8,3 +8,6 @@ pages:
       - elementName: SubmitNEW
         elementType: BUTTON
         elementLocator: "/button[@id='qweNEW']"
+      - elementName: Search
+        elementType: INPUT
+        elementLocator: "/input[@id='input']"

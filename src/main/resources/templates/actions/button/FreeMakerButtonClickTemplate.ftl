@@ -1,6 +1,6 @@
-@Step("Клик на кнопку ${elementName} на странице ${pageName}")
-public ${pageName} click${elementName}Button() {
-    ${elementName}.click();
+    @Step("Клик на кнопку ${elementName} на странице ${pageName}")
+    public ${pageName} click${elementName}Button() {
+        ${elementName}.click();
 
-    return this;
-}
+        return this;
+    }

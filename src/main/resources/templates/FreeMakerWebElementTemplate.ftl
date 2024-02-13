@@ -1,2 +1,2 @@
-@FindBy(xpath = ${elementLocator})
-private WebElement ${elementName};
+    @FindBy(xpath = "${elementLocator}")
+    private WebElement ${elementName};
