@@ -5,10 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class ${pageName}Page extends BasePage {
+public abstract class BasePage {
 
-    public ${pageName}Page(WebDriver driver) {
-        super(driver);
+    WebDriver driver;
+
+    protected static final String baseUrl = "${baseUrl}";
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
     }
 
 ${webElements}

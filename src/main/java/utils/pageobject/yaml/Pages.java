@@ -8,5 +8,6 @@ import java.util.List;
 @Getter
 @Setter
 public class Pages {
+    private String baseUrl;
     private List<Page> pages;
 }
