@@ -1,0 +1,27 @@
+---
+baseUrl: "https://example.com/"
+pages:
+  - pageName: Login
+    elements:
+      - elementName: Submit
+        elementType: BUTTON
+        elementLocator: "/button[@id='qwe']"
+      - elementName: SubmitNEW
+        elementType: BUTTON
+        elementLocator: "/button[@id='qweNEW']"
+      - elementName: Search
+        elementType: INPUT
+        elementLocator: "/input[@id='input']"
+  - pageName: Base
+    elements:
+      - elementName: Submit
+        elementType: BUTTON
+        elementLocator: "/button[@id='qwe']"
+      - elementName: SubmitNEW
+        elementType: BUTTON
+        elementLocator: "/button[@id='qweNEW']"
+  - pageName: LoginNew
+    elements:
+      - elementName: Search
+        elementType: INPUT
+        elementLocator: "/input[@id='input']"

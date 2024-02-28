@@ -1,9 +1,14 @@
 package ru.example;
 
-import ru.example.generator.TestCaseTemplate;
+import ru.example.generator.page.PageGenerator;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        TestCaseTemplate.generateTestCase();
+    public static void main(String[] args) {
+        PageGenerator pg = new PageGenerator();
+        try {
+            pg.generatePageObjectClass();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
