@@ -1,4 +1,4 @@
-package ru.example.freemaker;
+package ru.example.freemarker;
 
 import java.io.FileWriter;
 import java.io.StringWriter;
@@ -40,7 +40,7 @@ public class TestClassTemplateLoader {
         map.put("className", className);
         map.put("classFilling", classFilling);
 
-        template = cfg.getTemplate("FreeMakerScreenClassTemplate.ftl");
+        template = cfg.getTemplate("ScreenClassTemplate.ftl");
         //File output
         Writer file = new FileWriter("src/main/java/ru/example/screens/" + className + ".java");
         template.process(map, file);
@@ -58,7 +58,7 @@ public class TestClassTemplateLoader {
         map.put("testCaseSteps", testCaseSteps);
         map.put("testCaseScreens", testCaseScreens);
 
-        template = cfg.getTemplate("FreeMakerAutotestTemplate.ftl");
+        template = cfg.getTemplate("AutotestTemplate.ftl");
         Writer file = new FileWriter("src/test/java/ru/example/freemaker/tests/TestCase" + testNumber + ".java");
         template.process(map, file);
         file.flush();
@@ -83,7 +83,7 @@ public class TestClassTemplateLoader {
                 map.put("parameterType", "");
         }
 
-        template = cfg.getTemplate("FreeMakerTestMethodTemplate.ftl");
+        template = cfg.getTemplate("TestMethodTemplate.ftl");
 
         StringWriter stringWriter = new StringWriter();
         template.process(map, stringWriter);
@@ -103,11 +103,11 @@ public class TestClassTemplateLoader {
 
         switch (check) {
             case "is_visible":
-                template = cfg.getTemplate("FreeMakerAssertThatIsDisplayedTemplate.ftl");
+                template = cfg.getTemplate("AssertThatIsDisplayedTemplate.ftl");
                 break;
             case "equals":
                 map.put("expected", ("\"" + step.split(" ")[3]) + "\"");
-                template = cfg.getTemplate("FreeMakerAssertEqualsTemplate.ftl");
+                template = cfg.getTemplate("AssertEqualsTemplate.ftl");
                 break;
 
             default:

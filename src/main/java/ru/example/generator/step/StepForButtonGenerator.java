@@ -23,7 +23,7 @@ public class StepForButtonGenerator {
     }
 
     private String generateClickStepForButton(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/button/FreeMakerButtonClickTemplate.ftl";
+        templateFilePath = "actions/button/ButtonClickTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -33,7 +33,7 @@ public class StepForButtonGenerator {
     }
 
     private String generateDoubleClickStepForButton(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/button/FreeMakerButtonDoubleClickTemplate.ftl";
+        templateFilePath = "actions/button/ButtonDoubleClickTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());

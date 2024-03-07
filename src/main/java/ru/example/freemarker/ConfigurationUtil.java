@@ -1,4 +1,4 @@
-package ru.example.freemaker;
+package ru.example.freemarker;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;

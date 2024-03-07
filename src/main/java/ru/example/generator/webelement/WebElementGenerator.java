@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class WebElementGenerator {
     Map<String, Object> elementsForTemplate = new HashMap<>();
-    String templateFilePath = "FreeMakerWebElementTemplate.ftl";
+    String templateFilePath = "WebElementTemplate.ftl";
 
     //генерирует сет для веб-элемента
     public String generateWebElementByTemplate(Element element) throws Exception {

@@ -23,8 +23,8 @@ public class PageGenerator {
     StepGenerator stepGenerator = new StepGenerator();
     Set<String> setOfWebElements = new HashSet<>();
     Set<String> setOfSteps = new HashSet<>();
-    String pageObjectTemplateFilePath = "FreeMakerPageObjectTemplate.ftl";
-    String basePageTemplateFilePath = "FreeMakerBasePageTemplate.ftl";
+    String pageObjectTemplateFilePath = "PageObjectTemplate.ftl";
+    String basePageTemplateFilePath = "BasePageTemplate.ftl";
     Map<String, Object> elementsForTemplate = new HashMap<>();
 
     private Pages getPagesFromYAML() {

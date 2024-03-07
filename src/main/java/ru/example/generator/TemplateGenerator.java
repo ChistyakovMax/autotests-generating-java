@@ -2,7 +2,7 @@ package ru.example.generator;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import ru.example.freemaker.ConfigurationUtil;
+import ru.example.freemarker.ConfigurationUtil;
 
 import java.io.StringWriter;
 import java.util.Map;

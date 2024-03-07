@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-import ru.example.freemaker.TestClassTemplateLoader;
+import ru.example.freemarker.TestClassTemplateLoader;
 
 public class TestCaseTemplate {
 

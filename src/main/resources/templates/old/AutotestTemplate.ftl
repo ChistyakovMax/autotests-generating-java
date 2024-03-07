@@ -1,4 +1,4 @@
-package ru.example.freemaker.tests;
+package ru.example.freemarker.tests;
 
 import org.junit.Before;
 import org.junit.Test;
