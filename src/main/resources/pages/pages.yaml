@@ -1,27 +1,78 @@
 ---
-baseUrl: "https://example.com/"
+baseUrl: "https://stellarburgers.nomoreparties.site/"
 pages:
-  - pageName: Login
-    elements:
-      - elementName: Submit
-        elementType: BUTTON
-        elementLocator: "/button[@id='qwe']"
-      - elementName: SubmitNEW
-        elementType: BUTTON
-        elementLocator: "/button[@id='qweNEW']"
-      - elementName: Search
-        elementType: INPUT
-        elementLocator: "/input[@id='input']"
   - pageName: Base
     elements:
-      - elementName: Submit
+      - elementName: stellarburgersLogo
         elementType: BUTTON
-        elementLocator: "/button[@id='qwe']"
-      - elementName: SubmitNEW
+        elementLocator: ".//div[@class = 'AppHeader_header__logo__2D0X2']"
+      - elementName: signInLink
         elementType: BUTTON
-        elementLocator: "/button[@id='qweNEW']"
-  - pageName: LoginNew
+        elementLocator: ".//a[text() = 'Войти']"
+  - pageName: Login
     elements:
-      - elementName: Search
+      - elementName: email
         elementType: INPUT
-        elementLocator: "/input[@id='input']"
+        elementLocator: ".//input[@name = 'name']"
+      - elementName: password
+        elementType: INPUT
+        elementLocator: ".//input[@type = 'password']"
+      - elementName: signIn
+        elementType: BUTTON
+        elementLocator: ".//button[text()='Войти']"
+  - pageName: Main
+    elements:
+      - elementName: signIn
+        elementType: BUTTON
+        elementLocator: ".//button[text()='Войти в аккаунт']"
+      - elementName: getOrder
+        elementType: BUTTON
+        elementLocator: ".//button[text() = 'Оформить заказ']"
+      - elementName: personalAccount
+        elementType: BUTTON
+        elementLocator: ".//p[text() = 'Личный Кабинет']"
+      - elementName: currentTab
+        elementType: WEBELEMENT
+        elementLocator: ".//div[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']/span"
+      - elementName: bunsTab
+        elementType: BUTTON
+        elementLocator: ".//div/span[text()='Булки']"
+      - elementName: saucesTab
+        elementType: BUTTON
+        elementLocator: ".//div/span[text()='Соусы']"
+      - elementName: toppingTab
+        elementType: BUTTON
+        elementLocator: ".//div/span[text()='Начинки']"
+  - pageName: PasswordRecovery
+    elements:
+      - elementName: restorePassword
+        elementType: BUTTON
+        elementLocator: ".//button[text()='Восстановить']"
+  - pageName: Profile
+    elements:
+      - elementName: constructor
+        elementType: BUTTON
+        elementLocator: ".//p[text() = 'Конструктор']"
+      - elementName: profileLink
+        elementType: WEBELEMENT
+        elementLocator: ".//a[text() = 'Профиль']"
+      - elementName: logOut
+        elementType: BUTTON
+        elementLocator: ".//button[text()='Выход']"
+  - pageName: Registration
+    elements:
+      - elementName: name
+        elementType: INPUT
+        elementLocator: ".//fieldset[1]//input"
+      - elementName: email
+        elementType: INPUT
+        elementLocator: ".//fieldset[2]//input"
+      - elementName: password
+        elementType: INPUT
+        elementLocator: ".//fieldset[3]//input"
+      - elementName: signUp
+        elementType: BUTTON
+        elementLocator: ".//button[text()='Зарегистрироваться']"
+      - elementName: incorrectPasswordError
+        elementType: WEBELEMENT
+        elementLocator: ".//p[text()='Некорректный пароль']"

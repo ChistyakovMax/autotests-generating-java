@@ -9,6 +9,7 @@ import java.util.Set;
 public class StepGenerator {
     StepForButtonGenerator stepForButtonGenerator;
     StepForInputGenerator stepForInputGenerator;
+    StepForWebElementGenerator stepForWebElementGenerator;
     Set<String> setOfSteps;
 
     //генерирует строку для шагов для работы с веб-элементами
@@ -24,6 +25,10 @@ public class StepGenerator {
             case INPUT:
                 stepForInputGenerator = new StepForInputGenerator();
                 setOfSteps = stepForInputGenerator.generateStepsForInput(element, pageName);
+                break;
+            case WEBELEMENT:
+                stepForWebElementGenerator = new StepForWebElementGenerator();
+                setOfSteps = stepForWebElementGenerator.generateStepsForWebElement(element, pageName);
                 break;
             default:
                 throw new IllegalArgumentException("Unexpected value: " + element.getElementType());
