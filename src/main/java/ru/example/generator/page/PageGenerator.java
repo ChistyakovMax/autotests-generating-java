@@ -5,6 +5,7 @@ import ru.example.filewriter.FileCreator;
 import ru.example.generator.TemplateGenerator;
 import ru.example.generator.step.StepGenerator;
 import ru.example.generator.webelement.WebElementGenerator;
+import utils.Prettier;
 import utils.pageobject.StringTransformer;
 import utils.pageobject.yaml.Element;
 import utils.pageobject.yaml.Page;
@@ -51,6 +52,8 @@ public class PageGenerator {
             String pageName = page.getPageName();
             //для каждого элемента создаем веб-элементы и шаги в PageObject классе
             for (Element element : page.getElements()) {
+                //для каждого элемента изменяем имя на соответствующее
+                element.setElementName(Prettier.getElementNameForGenerate(element));
                 //генерация веб-элемента и добавление его в сет веб-элементов
                 setOfWebElements.add(webElementGenerator.generateWebElementByTemplate(element));
                 //генерация шагов для работы с веб-элементами и добавление их в сет шагов

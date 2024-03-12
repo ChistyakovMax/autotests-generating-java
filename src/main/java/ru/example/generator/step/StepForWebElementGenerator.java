@@ -1,6 +1,7 @@
 package ru.example.generator.step;
 
 import ru.example.generator.TemplateGenerator;
+import utils.Prettier;
 import utils.pageobject.yaml.Element;
 
 import java.util.HashMap;
@@ -17,6 +18,8 @@ public class StepForWebElementGenerator {
     protected  Set<String> generateStepsForWebElement(Element element, String pageName) throws Exception {
         stepsForWebElement.clear();
         stepsForWebElement.add(generateGetTextForWebElement(element, pageName));
+        stepsForWebElement.add(generateIsDisplayedForWebElement(element, pageName));
+        stepsForWebElement.add(generateIsNotDisplayedForWebElement(element, pageName));
 
         return stepsForWebElement;
     }
@@ -26,6 +29,29 @@ public class StepForWebElementGenerator {
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
+        elementsForTemplate.put("pageName", pageName);
+
+        return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
+    }
+
+    private String generateIsDisplayedForWebElement(Element element, String pageName) throws Exception {
+        templateFilePath = "actions/webelement/WebElementIsDisplayed.ftl";
+        elementsForTemplate.clear();
+
+        elementsForTemplate.put("elementName", element.getElementName());
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
+        elementsForTemplate.put("pageName", pageName);
+
+        return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
+    }
+
+    private String generateIsNotDisplayedForWebElement(Element element, String pageName) throws Exception {
+        templateFilePath = "actions/webelement/WebElementIsNotDisplayed.ftl";
+        elementsForTemplate.clear();
+
+        elementsForTemplate.put("elementName", element.getElementName());
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
         elementsForTemplate.put("pageName", pageName);
 
         return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);

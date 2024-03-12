@@ -1,5 +1,5 @@
     @Step("Клик на кнопку ${elementName} на странице ${pageName}")
-    public ${pageName}Page click${elementName}Button() {
+    public ${pageName}Page click${elementNameWithUpperCaseFirstLetter}() {
         ${elementName}.click();
 
         return this;

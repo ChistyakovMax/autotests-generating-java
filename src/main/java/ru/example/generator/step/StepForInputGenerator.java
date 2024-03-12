@@ -1,6 +1,7 @@
 package ru.example.generator.step;
 
 import ru.example.generator.TemplateGenerator;
+import utils.Prettier;
 import utils.pageobject.yaml.Element;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class StepForInputGenerator {
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
         elementsForTemplate.put("pageName", pageName);
 
         return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
@@ -37,6 +39,7 @@ public class StepForInputGenerator {
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
         elementsForTemplate.put("pageName", pageName);
 
         return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
