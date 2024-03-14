@@ -2,6 +2,7 @@
 baseUrl: "https://stellarburgers.nomoreparties.site/"
 pages:
   - pageName: Base
+    additionalUrl: ""
     elements:
       - elementName: stellarburgersLogo
         elementType: BUTTON
@@ -10,6 +11,7 @@ pages:
         elementType: BUTTON
         elementLocator: ".//a[text() = 'Войти']"
   - pageName: Login
+    additionalUrl: "login"
     elements:
       - elementName: email
         elementType: INPUT
@@ -21,6 +23,7 @@ pages:
         elementType: BUTTON
         elementLocator: ".//button[text()='Войти']"
   - pageName: Main
+    additionalUrl: ""
     elements:
       - elementName: signIn
         elementType: BUTTON
@@ -44,11 +47,13 @@ pages:
         elementType: BUTTON
         elementLocator: ".//div/span[text()='Начинки']"
   - pageName: PasswordRecovery
+    additionalUrl: "forgot-password"
     elements:
       - elementName: restorePassword
         elementType: BUTTON
         elementLocator: ".//button[text()='Восстановить']"
   - pageName: Profile
+    additionalUrl: "account/profile"
     elements:
       - elementName: constructor
         elementType: BUTTON
@@ -60,6 +65,7 @@ pages:
         elementType: BUTTON
         elementLocator: ".//button[text()='Выход']"
   - pageName: Registration
+    additionalUrl: "register"
     elements:
       - elementName: name
         elementType: INPUT

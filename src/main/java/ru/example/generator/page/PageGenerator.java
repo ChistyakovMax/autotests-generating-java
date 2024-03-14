@@ -50,6 +50,8 @@ public class PageGenerator {
             setOfSteps.clear();
             elementsForTemplate.clear();
             String pageName = page.getPageName();
+            String additionalUrl = page.getAdditionalUrl();
+
             //для каждого элемента создаем веб-элементы и шаги в PageObject классе
             for (Element element : page.getElements()) {
                 //для каждого элемента изменяем имя на соответствующее
@@ -66,6 +68,7 @@ public class PageGenerator {
             elementsForTemplate.put("pageName", pageName);
             elementsForTemplate.put("webElements", webElements);
             elementsForTemplate.put("steps", steps);
+            elementsForTemplate.put("additionalUrl", additionalUrl);
 
             String pageObject = TemplateGenerator.generateFromTemplate(elementsForTemplate, pageObjectTemplateFilePath);
             System.out.println(pageObject);

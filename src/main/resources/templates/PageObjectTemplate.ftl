@@ -11,6 +11,7 @@ public class ${pageName}Page extends BasePage {
 
     public ${pageName}Page(WebDriver driver) {
         super(driver);
+        currentUrl = baseUrl + "${additionalUrl}";
     }
 
 ${webElements}
