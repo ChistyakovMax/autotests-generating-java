@@ -3,7 +3,7 @@ package ru.example.generator.page;
 import org.yaml.snakeyaml.Yaml;
 import ru.example.filewriter.FileCreator;
 import ru.example.generator.TemplateGenerator;
-import ru.example.generator.step.StepGenerator;
+import ru.example.generator.page.step.StepGenerator;
 import ru.example.generator.webelement.WebElementGenerator;
 import utils.Prettier;
 import utils.pageobject.StringTransformer;

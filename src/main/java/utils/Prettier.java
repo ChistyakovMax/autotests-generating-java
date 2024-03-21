@@ -25,4 +25,9 @@ public class Prettier {
         return element.getElementName().substring(0,1).toUpperCase()
                 + element.getElementName().substring(1);
     }
+
+    public static String getElementNameWithUpperCaseFirstLetter(String element) {
+        return element.substring(0,1).toUpperCase()
+                + element.substring(1);
+    }
 }

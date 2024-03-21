@@ -1,4 +1,4 @@
-package ru.example.generator.step;
+package ru.example.generator.page.step;
 
 import ru.example.generator.TemplateGenerator;
 import utils.Prettier;
@@ -18,8 +18,9 @@ public class StepForWebElementGenerator {
     protected  Set<String> generateStepsForWebElement(Element element, String pageName) throws Exception {
         stepsForWebElement.clear();
         stepsForWebElement.add(generateGetTextForWebElement(element, pageName));
-        stepsForWebElement.add(generateIsDisplayedForWebElement(element, pageName));
-        stepsForWebElement.add(generateIsNotDisplayedForWebElement(element, pageName));
+        stepsForWebElement.add(generateAssertIsDisplayedForWebElement(element, pageName));
+        stepsForWebElement.add(generateAssertIsNotDisplayedForWebElement(element, pageName));
+        stepsForWebElement.add(generateAssertEqualsForWebElement(element, pageName));
 
         return stepsForWebElement;
     }
@@ -35,8 +36,8 @@ public class StepForWebElementGenerator {
         return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
     }
 
-    private String generateIsDisplayedForWebElement(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/webelement/WebElementIsDisplayed.ftl";
+    private String generateAssertIsDisplayedForWebElement(Element element, String pageName) throws Exception {
+        templateFilePath = "actions/webelement/WebElementAssertIsDisplayed.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -46,8 +47,19 @@ public class StepForWebElementGenerator {
         return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
     }
 
-    private String generateIsNotDisplayedForWebElement(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/webelement/WebElementIsNotDisplayed.ftl";
+    private String generateAssertIsNotDisplayedForWebElement(Element element, String pageName) throws Exception {
+        templateFilePath = "actions/webelement/WebElementAssertIsNotDisplayed.ftl";
+        elementsForTemplate.clear();
+
+        elementsForTemplate.put("elementName", element.getElementName());
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
+        elementsForTemplate.put("pageName", pageName);
+
+        return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
+    }
+
+    private String generateAssertEqualsForWebElement(Element element, String pageName) throws Exception {
+        templateFilePath = "actions/webelement/WebElementAssertEquals.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());

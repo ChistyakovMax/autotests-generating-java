@@ -1,8 +1,10 @@
 TestCase 101
 Click SearchScreen.searchBar
-fill SearchScreen.searchBar with t-shirt
-Assert SearchScreen.cancelButton is_visible
+fill SearchScreen.searchBar with Test text
+Assert SearchScreen.cancelButton is_displayed
 Click SearchScreen.searchButton
 Assert SearchResultScreen.searchResultText is_visible
-Assert SearchResultScreen.searchResultText equals t-shirt
+Assert SearchResultScreen.searchResultText equals Test text
 Click SearchScreen.orderButton
+Assert https://something.com is_current_url
+Go_to https://something.com is_current_url

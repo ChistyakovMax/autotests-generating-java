@@ -1,4 +1,4 @@
-package ru.example.generator.step;
+package ru.example.generator.page.step;
 
 import utils.pageobject.ElementType;
 import utils.pageobject.yaml.Element;
