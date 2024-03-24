@@ -1,6 +1,6 @@
 package utils.testcase.types;
 
-public enum ActionType {
+public enum TestStepActionType {
     CLICK,
     DOUBLE_CLICK,
     FILL,

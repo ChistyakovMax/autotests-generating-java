@@ -26,7 +26,7 @@ public class StepForWebElementGenerator {
     }
 
     private String generateGetTextForWebElement(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/webelement/WebElementGetTextTemplate.ftl";
+        templateFilePath = "page/step/webelement/action/WebElementGetTextTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -37,7 +37,7 @@ public class StepForWebElementGenerator {
     }
 
     private String generateAssertIsDisplayedForWebElement(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/webelement/WebElementAssertIsDisplayed.ftl";
+        templateFilePath = "page/step/webelement/assert/WebElementAssertIsDisplayed.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -48,7 +48,7 @@ public class StepForWebElementGenerator {
     }
 
     private String generateAssertIsNotDisplayedForWebElement(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/webelement/WebElementAssertIsNotDisplayed.ftl";
+        templateFilePath = "page/step/webelement/assert/WebElementAssertIsNotDisplayed.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -59,7 +59,7 @@ public class StepForWebElementGenerator {
     }
 
     private String generateAssertEqualsForWebElement(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/webelement/WebElementAssertEquals.ftl";
+        templateFilePath = "page/step/webelement/assert/WebElementAssertEquals.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());

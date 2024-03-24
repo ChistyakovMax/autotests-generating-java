@@ -1,21 +1,27 @@
-package utils.testcase;
+package utils.testcase.step;
 
-import utils.testcase.types.ActionType;
+import lombok.Getter;
+import lombok.Setter;
+import utils.testcase.types.TestStepActionType;
+import utils.testcase.types.TestStepType;
 
-public class TestCaseAction extends TestCaseStep {
+@Getter
+@Setter
+public class TestCaseStepAction extends TestCaseStep {
 
-    private ActionType actionType;
+    private TestStepActionType testStepActionType;
     private String fillingText = "";
     private String reachedUrl = "";
 
-    public TestCaseAction(String actionFromFile) {
+    public TestCaseStepAction(String actionFromFile) {
         //Click SearchScreen.searchBar
         //fill SearchScreen.searchBar with Test text
         //double_click SearchScreen.searchBar
         //clear SearchScreen.searchBar
         //Go_to https://something.com
-        actionType = ActionType.valueOf(actionFromFile.split(" ")[0].toUpperCase());
-        switch (actionType) {
+        testStepType = TestStepType.ACTION;
+        testStepActionType = TestStepActionType.valueOf(actionFromFile.split(" ")[0].toUpperCase());
+        switch (testStepActionType) {
             case FILL:
                 fillingText = actionFromFile.split(" with ")[1];
             case GO_TO:
@@ -27,7 +33,8 @@ public class TestCaseAction extends TestCaseStep {
                 elementName = getElementName(actionFromFile);
             break;
             default:
-                throw new IllegalArgumentException("Unexpected value: " + actionType);
+                throw new IllegalArgumentException("Unexpected value: " + testStepActionType);
         }
+
     }
 }

@@ -1,4 +1,4 @@
-package ru.example.freemarker;
+package ru.example.old;
 
 import java.io.FileWriter;
 import java.io.StringWriter;
@@ -9,6 +9,7 @@ import java.util.Set;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import ru.example.freemarker.ConfigurationUtil;
 
 public class TestClassTemplateLoader {
     private static final Map<String, String> actionsAndMethods = createActionsAndMethodsHashMap();

@@ -24,7 +24,7 @@ public class StepForInputGenerator {
     }
 
     private String generateFillingStepForInput(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/input/InputFillingTemplate.ftl";
+        templateFilePath = "page/step/input/InputFillingTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -35,7 +35,7 @@ public class StepForInputGenerator {
     }
 
     private String generateClearingStepForInput(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/input/InputClearingTemplate.ftl";
+        templateFilePath = "page/step/input/InputClearingTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());

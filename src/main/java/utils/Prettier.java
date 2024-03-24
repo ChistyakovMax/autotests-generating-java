@@ -30,4 +30,9 @@ public class Prettier {
         return element.substring(0,1).toUpperCase()
                 + element.substring(1);
     }
+
+    public static String getElementNameWithLowerCaseFirstLetter(String element) {
+        return element.substring(0,1).toLowerCase()
+                + element.substring(1);
+    }
 }

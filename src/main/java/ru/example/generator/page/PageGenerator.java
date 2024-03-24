@@ -4,9 +4,9 @@ import org.yaml.snakeyaml.Yaml;
 import ru.example.filewriter.FileCreator;
 import ru.example.generator.TemplateGenerator;
 import ru.example.generator.page.step.StepGenerator;
-import ru.example.generator.webelement.WebElementGenerator;
+import ru.example.generator.page.webelement.WebElementGenerator;
 import utils.Prettier;
-import utils.pageobject.StringTransformer;
+import utils.StringTransformer;
 import utils.pageobject.yaml.Element;
 import utils.pageobject.yaml.Page;
 import utils.pageobject.yaml.Pages;
@@ -20,13 +20,13 @@ import java.util.Set;
 
 public class PageGenerator {
 
-    WebElementGenerator webElementGenerator = new WebElementGenerator();
-    StepGenerator stepGenerator = new StepGenerator();
-    Set<String> setOfWebElements = new HashSet<>();
-    Set<String> setOfSteps = new HashSet<>();
-    String pageObjectTemplateFilePath = "PageObjectTemplate.ftl";
-    String basePageTemplateFilePath = "BasePageTemplate.ftl";
-    Map<String, Object> elementsForTemplate = new HashMap<>();
+    private WebElementGenerator webElementGenerator = new WebElementGenerator();
+    private StepGenerator stepGenerator = new StepGenerator();
+    private Set<String> webElements = new HashSet<>();
+    private Set<String> steps = new HashSet<>();
+    private final String pageObjectTemplateFilePath = "page/PageObjectTemplate.ftl";
+    private final String basePageTemplateFilePath = "page/BasePageTemplate.ftl";
+    private Map<String, Object> elementsForTemplate = new HashMap<>();
 
     private Pages getPagesFromYAML() {
         Yaml yaml = new Yaml();
@@ -38,7 +38,7 @@ public class PageGenerator {
     //генерирует PageObject класс
     //1. генерация веб-элементов
     //2. генерация шагов для работы с веб-элементами
-    public void generatePageObjectClass() throws Exception {
+    public void generatePages() throws Exception {
         Pages pages = getPagesFromYAML();
         //генерация BasePage
         generateBasePage(pages);
@@ -46,8 +46,8 @@ public class PageGenerator {
         for (Page page : pages.getPages()) {
             if (page.getPageName().equals("Base")) continue;
 
-            setOfWebElements.clear();
-            setOfSteps.clear();
+            webElements.clear();
+            steps.clear();
             elementsForTemplate.clear();
             String pageName = page.getPageName();
             String additionalUrl = page.getAdditionalUrl();
@@ -57,13 +57,13 @@ public class PageGenerator {
                 //для каждого элемента изменяем имя на соответствующее
                 element.setElementName(Prettier.getElementNameForGenerate(element));
                 //генерация веб-элемента и добавление его в сет веб-элементов
-                setOfWebElements.add(webElementGenerator.generateWebElementByTemplate(element));
+                webElements.add(webElementGenerator.generateWebElementByTemplate(element));
                 //генерация шагов для работы с веб-элементами и добавление их в сет шагов
-                setOfSteps.addAll(stepGenerator.generateStepsByTemplate(element, pageName));
+                steps.addAll(stepGenerator.generateStepsByTemplate(element, pageName));
             }
 
-            String webElements = StringTransformer.transformToString(setOfWebElements);
-            String steps = StringTransformer.transformToString(setOfSteps);
+            String webElements = StringTransformer.transformToString(this.webElements);
+            String steps = StringTransformer.transformToString(this.steps);
 
             elementsForTemplate.put("pageName", pageName);
             elementsForTemplate.put("webElements", webElements);
@@ -79,8 +79,8 @@ public class PageGenerator {
     private void generateBasePage(Pages pages) throws Exception {
         String basePageName = "Base";
         Page basePage = null;
-        setOfWebElements.clear();
-        setOfSteps.clear();
+        webElements.clear();
+        steps.clear();
         elementsForTemplate.clear();
         elementsForTemplate.put("baseUrl", pages.getBaseUrl());
         
@@ -98,13 +98,13 @@ public class PageGenerator {
             //для каждого элемента создаем веб-элементы и шаги в PageObject классе
             for (Element element : basePage.getElements()) {
                 //генерация веб-элемента и добавление его в сет веб-элементов
-                setOfWebElements.add(webElementGenerator.generateWebElementByTemplate(element));
+                webElements.add(webElementGenerator.generateWebElementByTemplate(element));
                 //генерация шагов для работы с веб-элементами и добавление их в сет шагов
-                setOfSteps.addAll(stepGenerator.generateStepsByTemplate(element, basePageName));
+                steps.addAll(stepGenerator.generateStepsByTemplate(element, basePageName));
             }
 
-            String webElements = StringTransformer.transformToString(setOfWebElements);
-            String steps = StringTransformer.transformToString(setOfSteps);
+            String webElements = StringTransformer.transformToString(this.webElements);
+            String steps = StringTransformer.transformToString(this.steps);
 
             elementsForTemplate.put("webElements", webElements);
             elementsForTemplate.put("steps", steps);

@@ -1,23 +1,25 @@
-package utils.testcase;
+package utils.testcase.step;
 
 import lombok.Getter;
 import lombok.Setter;
-import utils.testcase.types.AssertType;
+import utils.testcase.types.TestStepAssertType;
+import utils.testcase.types.TestStepType;
 
 @Getter
 @Setter
-public class TestCaseAssert extends TestCaseStep{
+public class TestCaseStepAssert extends TestCaseStep {
 
-    private AssertType assertType;
+    private TestStepAssertType testStepAssertType;
     private String expectedText = "";
     private String expectedUrl = "";
 
-    public TestCaseAssert(String assertFromFile) {
+    public TestCaseStepAssert(String assertFromFile) {
         //Assert SearchScreen.cancel is_displayed
         //Assert SearchResultScreen.searchText equals t-shirt
-        //Assert current_url_is https://something.com
-        assertType = AssertType.valueOf(assertFromFile.split(" ")[2].toUpperCase());
-        switch (assertType) {
+        //Assert https://something.com is_current_url
+        testStepType = TestStepType.ASSERT;
+        testStepAssertType = TestStepAssertType.valueOf(assertFromFile.split(" ")[2].toUpperCase());
+        switch (testStepAssertType) {
             case EQUALS:
                 expectedText = assertFromFile.split(" equals ")[1];
             case IS_DISPLAYED:
@@ -30,7 +32,7 @@ public class TestCaseAssert extends TestCaseStep{
                 expectedUrl = assertFromFile.split(" ")[1].toLowerCase();
                 break;
             default:
-                throw new IllegalArgumentException("Unexpected value: " + assertType);
+                throw new IllegalArgumentException("Unexpected value: " + testStepAssertType);
         }
     }
 

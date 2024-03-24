@@ -19,4 +19,16 @@ public class FileCreator {
         bw.write(pageObject);
         bw.close();
     }
+
+    public static void createTestCaseClass(String testCase, String name) throws IOException {
+        file = new File("./src/test/java/ru/example/" + name + "Test.java");
+        if (file.delete()) {
+            System.out.println("Deleted the file: " + file.getName());
+        }
+        file.createNewFile();
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(testCase);
+        bw.close();
+    }
 }

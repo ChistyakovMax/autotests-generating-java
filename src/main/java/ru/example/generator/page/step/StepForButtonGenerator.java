@@ -24,7 +24,7 @@ public class StepForButtonGenerator {
     }
 
     private String generateClickStepForButton(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/button/ButtonClickTemplate.ftl";
+        templateFilePath = "page/step/button/ButtonClickTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
@@ -35,7 +35,7 @@ public class StepForButtonGenerator {
     }
 
     private String generateDoubleClickStepForButton(Element element, String pageName) throws Exception {
-        templateFilePath = "actions/button/ButtonDoubleClickTemplate.ftl";
+        templateFilePath = "page/step/button/ButtonDoubleClickTemplate.ftl";
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());

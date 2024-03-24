@@ -1,4 +1,4 @@
-package ru.example.generator.webelement;
+package ru.example.generator.page.webelement;
 
 import ru.example.generator.TemplateGenerator;
 import utils.pageobject.yaml.Element;
@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class WebElementGenerator {
     Map<String, Object> elementsForTemplate = new HashMap<>();
-    String templateFilePath = "WebElementTemplate.ftl";
+    String templateFilePath = "page/step/webelement/WebElementTemplate.ftl";
 
     //генерирует сет для веб-элемента
     public String generateWebElementByTemplate(Element element) throws Exception {

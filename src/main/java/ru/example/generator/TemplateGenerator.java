@@ -19,4 +19,13 @@ public class TemplateGenerator {
 
         return stringWriter.toString();
     }
+
+    public static String generateFromTemplate(String templateFilePath) throws Exception {
+        cfg = ConfigurationUtil.getConfiguration();
+        template = cfg.getTemplate(templateFilePath);
+        StringWriter stringWriter = new StringWriter();
+        template.process(null, stringWriter);
+
+        return stringWriter.toString();
+    }
 }
