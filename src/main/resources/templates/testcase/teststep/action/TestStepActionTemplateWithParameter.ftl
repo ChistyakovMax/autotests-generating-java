@@ -1,0 +1,1 @@
+${pageName}Page.${actionType}${elementNameWithUpperCaseFirstLetter}("${parameter}");
