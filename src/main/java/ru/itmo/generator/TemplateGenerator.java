@@ -1,8 +1,8 @@
-package ru.example.generator;
+package ru.itmo.generator;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import ru.example.freemarker.ConfigurationUtil;
+import ru.itmo.freemarker.ConfigurationUtil;
 
 import java.io.StringWriter;
 import java.util.Map;

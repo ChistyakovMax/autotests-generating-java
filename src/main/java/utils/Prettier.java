@@ -21,12 +21,12 @@ public class Prettier {
         }
     }
 
-    public static String getElementNameWithUpperCaseFirstLetter(Element element) {
+    public static String getNameWithUpperCaseFirstLetter(Element element) {
         return element.getElementName().substring(0,1).toUpperCase()
                 + element.getElementName().substring(1);
     }
 
-    public static String getElementNameWithUpperCaseFirstLetter(String element) {
+    public static String getNameWithUpperCaseFirstLetter(String element) {
         return element.substring(0,1).toUpperCase()
                 + element.substring(1);
     }

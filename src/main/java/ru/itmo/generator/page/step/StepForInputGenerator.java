@@ -1,6 +1,6 @@
-package ru.example.generator.page.step;
+package ru.itmo.generator.page.step;
 
-import ru.example.generator.TemplateGenerator;
+import ru.itmo.generator.TemplateGenerator;
 import utils.Prettier;
 import utils.pageobject.yaml.Element;
 
@@ -28,7 +28,7 @@ public class StepForInputGenerator {
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
-        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getNameWithUpperCaseFirstLetter(element));
         elementsForTemplate.put("pageName", pageName);
 
         return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
@@ -39,7 +39,7 @@ public class StepForInputGenerator {
         elementsForTemplate.clear();
 
         elementsForTemplate.put("elementName", element.getElementName());
-        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(element));
+        elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getNameWithUpperCaseFirstLetter(element));
         elementsForTemplate.put("pageName", pageName);
 
         return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);

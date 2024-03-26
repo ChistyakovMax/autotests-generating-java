@@ -1,10 +1,10 @@
-package ru.example.generator.page;
+package ru.itmo.generator.page;
 
 import org.yaml.snakeyaml.Yaml;
-import ru.example.filewriter.FileCreator;
-import ru.example.generator.TemplateGenerator;
-import ru.example.generator.page.step.StepGenerator;
-import ru.example.generator.page.webelement.WebElementGenerator;
+import ru.itmo.filewriter.FileCreator;
+import ru.itmo.generator.TemplateGenerator;
+import ru.itmo.generator.page.step.StepGenerator;
+import ru.itmo.generator.page.webelement.WebElementGenerator;
 import utils.Prettier;
 import utils.StringTransformer;
 import utils.pageobject.yaml.Element;
@@ -17,6 +17,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static utils.Constants.basePageName;
+
 
 public class PageGenerator {
 
@@ -28,11 +30,20 @@ public class PageGenerator {
     private final String basePageTemplateFilePath = "page/BasePageTemplate.ftl";
     private Map<String, Object> elementsForTemplate = new HashMap<>();
 
-    private Pages getPagesFromYAML() {
+    public Pages getPagesFromYAML() {
         Yaml yaml = new Yaml();
         InputStream iStream = this.getClass().getClassLoader().getResourceAsStream("pages/pages.yaml");
+        Pages pages = yaml.loadAs(iStream, Pages.class);
+        for(Page page: pages.getPages()) {
+            //для каждой страницы изменяем имя на соответствующее
+            page.setPageName(Prettier.getNameWithUpperCaseFirstLetter(page.getPageName()));
+            for(Element element: page.getElements()) {
+                //для каждого элемента изменяем имя на соответствующее
+                element.setElementName(Prettier.getElementNameForGenerate(element));
+            }
+        }
 
-        return yaml.loadAs(iStream, Pages.class);
+        return pages;
     }
 
     //генерирует PageObject класс
@@ -54,16 +65,14 @@ public class PageGenerator {
 
             //для каждого элемента создаем веб-элементы и шаги в PageObject классе
             for (Element element : page.getElements()) {
-                //для каждого элемента изменяем имя на соответствующее
-                element.setElementName(Prettier.getElementNameForGenerate(element));
                 //генерация веб-элемента и добавление его в сет веб-элементов
                 webElements.add(webElementGenerator.generateWebElementByTemplate(element));
                 //генерация шагов для работы с веб-элементами и добавление их в сет шагов
                 steps.addAll(stepGenerator.generateStepsByTemplate(element, pageName));
             }
 
-            String webElements = StringTransformer.transformToString(this.webElements);
-            String steps = StringTransformer.transformToString(this.steps);
+            String webElements = StringTransformer.transformToStringWithTwoEnters(this.webElements);
+            String steps = StringTransformer.transformToStringWithTwoEnters(this.steps);
 
             elementsForTemplate.put("pageName", pageName);
             elementsForTemplate.put("webElements", webElements);
@@ -77,7 +86,6 @@ public class PageGenerator {
     }
 
     private void generateBasePage(Pages pages) throws Exception {
-        String basePageName = "Base";
         Page basePage = null;
         webElements.clear();
         steps.clear();
@@ -103,8 +111,8 @@ public class PageGenerator {
                 steps.addAll(stepGenerator.generateStepsByTemplate(element, basePageName));
             }
 
-            String webElements = StringTransformer.transformToString(this.webElements);
-            String steps = StringTransformer.transformToString(this.steps);
+            String webElements = StringTransformer.transformToStringWithTwoEnters(this.webElements);
+            String steps = StringTransformer.transformToStringWithTwoEnters(this.steps);
 
             elementsForTemplate.put("webElements", webElements);
             elementsForTemplate.put("steps", steps);

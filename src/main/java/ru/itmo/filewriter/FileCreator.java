@@ -1,4 +1,4 @@
-package ru.example.filewriter;
+package ru.itmo.filewriter;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,7 +9,7 @@ public class FileCreator {
     private static File file;
 
     public static void createPageObjectClass(String pageObject, String name) throws IOException {
-        file = new File("./src/main/java/ru/example/pages/" + name + "Page.java");
+        file = new File("./src/main/java/ru/itmo/pages/" + name + "Page.java");
         if (file.delete()) {
             System.out.println("Deleted the file: " + file.getName());
         }
@@ -21,7 +21,7 @@ public class FileCreator {
     }
 
     public static void createTestCaseClass(String testCase, String name) throws IOException {
-        file = new File("./src/test/java/ru/example/" + name + "Test.java");
+        file = new File("./src/test/java/ru/itmo/" + name + "Test.java");
         if (file.delete()) {
             System.out.println("Deleted the file: " + file.getName());
         }

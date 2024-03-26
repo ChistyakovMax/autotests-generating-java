@@ -1,7 +1,7 @@
-package ru.example.generator.testcase;
+package ru.itmo.generator.testcase;
 
-import ru.example.filewriter.FileCreator;
-import ru.example.generator.TemplateGenerator;
+import ru.itmo.filewriter.FileCreator;
+import ru.itmo.generator.TemplateGenerator;
 import utils.StringTransformer;
 import utils.testcase.TestCase;
 import utils.testcase.step.TestCaseStepAction;
@@ -16,13 +16,14 @@ import java.util.*;
 public class TestCaseGenerator {
 
     private final String assertion = "ASSERT";
-    private final Set<String> actions = Set.of("CLICK", "DOUBLE_CLICK", "FILL", "CLEAR", "GO_TO");
+    private final Set<String> actions = Set.of("CLICK", "DOUBLE_CLICK", "FILL", "CLEAR", "GO_TO_PAGE", "GO_TO_URL");
     private final String exceptionMessage = "Строка должна начинаться с " + assertion + " либо " + actions + "!";
     private final String testCaseTemplateFilePath = "testcase/TestCaseTemplate.ftl";
     private final String baseTestTemplateFilePath = "testcase/BaseTestTemplate.ftl";
     private Set<String> pages = new HashSet<>();
     private List<String> steps = new ArrayList<>();
     private Map<String, Object> elementsForTemplate = new HashMap<>();
+    private String pageInTest = "";
 
     private TestCase getTestCaseFromTextFile() throws Exception {
         TestCase testCase = new TestCase();
@@ -62,11 +63,15 @@ public class TestCaseGenerator {
         String testName = testCase.getName();
 
         for (TestCaseStep step: testCase.getTestSteps()) {
-            pages.add(TestCaseStepGenerator.generatePageInTestCase(step));
+            pageInTest = TestCaseStepGenerator.generatePageInTestCase(step);
+            if(!pageInTest.isEmpty() && !pages.contains(pageInTest)) {
+                steps.add(TestCaseStepGenerator.generateInitOfPage(step));
+            }
+            pages.add(pageInTest);
             steps.add(TestCaseStepGenerator.generateTestCaseStep(step));
         }
 
-        String testCasePages = StringTransformer.transformToString(this.pages);
+        String testCasePages = StringTransformer.transformToStringWithOneEnter(this.pages);
         String testCaseSteps = StringTransformer.transformToStringWithTabulation(this.steps);
 
         elementsForTemplate.put("name", testName);

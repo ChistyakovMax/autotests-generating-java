@@ -1,4 +1,4 @@
-package ru.example.old;
+package ru.itmo.old;
 
 import java.io.FileWriter;
 import java.io.StringWriter;
@@ -9,12 +9,12 @@ import java.util.Set;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import ru.example.freemarker.ConfigurationUtil;
+import ru.itmo.freemarker.ConfigurationUtil;
 
 public class TestClassTemplateLoader {
     private static final Map<String, String> actionsAndMethods = createActionsAndMethodsHashMap();
 
-    private static Map createActionsAndMethodsHashMap() {
+    private static Map<String, String> createActionsAndMethodsHashMap() {
         Map<String, String> map = new HashMap<>();
         map.put("click", "click");
         map.put("tap", "click");

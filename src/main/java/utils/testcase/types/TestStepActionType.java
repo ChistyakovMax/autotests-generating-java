@@ -5,6 +5,6 @@ public enum TestStepActionType {
     DOUBLE_CLICK,
     FILL,
     CLEAR,
-    GO_TO
-
+    GO_TO_URL,
+    GO_TO_PAGE
 }

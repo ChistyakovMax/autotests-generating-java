@@ -1,4 +1,6 @@
 TestCase CheckTransitionToBunsSection
-click Main.sausesTab
-click Main.bunsTab
-Assert Main.currentTab equals Булки
+click Main.signIn
+click Main.personalAccount
+Go_to_url https://stellarburgers.nomoreparties.site/register
+click Registration.signInLink
+click Main.getOrder

@@ -1,4 +1,4 @@
-package ru.example.screens;
+package ru.itmo.screens;
 
 import static org.junit.Assert.*;
 

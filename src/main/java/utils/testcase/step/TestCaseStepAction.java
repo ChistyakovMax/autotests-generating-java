@@ -22,10 +22,11 @@ public class TestCaseStepAction extends TestCaseStep {
         testStepType = TestStepType.ACTION;
         testStepActionType = TestStepActionType.valueOf(actionFromFile.split(" ")[0].toUpperCase());
         switch (testStepActionType) {
+            case GO_TO_URL:
+                reachedUrl = actionFromFile.split(" ")[1];
+                break;
             case FILL:
                 fillingText = actionFromFile.split(" with ")[1];
-            case GO_TO:
-                reachedUrl = actionFromFile.split(" ")[1];
             case CLICK:
             case DOUBLE_CLICK:
             case CLEAR:

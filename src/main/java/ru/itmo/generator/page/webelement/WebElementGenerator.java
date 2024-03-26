@@ -1,6 +1,6 @@
-package ru.example.generator.page.webelement;
+package ru.itmo.generator.page.webelement;
 
-import ru.example.generator.TemplateGenerator;
+import ru.itmo.generator.TemplateGenerator;
 import utils.pageobject.yaml.Element;
 
 import java.util.HashMap;

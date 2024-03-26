@@ -1,4 +1,4 @@
-package ru.example;
+package ru.itmo;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
@@ -19,6 +19,7 @@ public abstract class BaseTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
 
+        driver.get("https://stellarburgers.nomoreparties.site/");
         driver.manage().window().maximize();
     }
 

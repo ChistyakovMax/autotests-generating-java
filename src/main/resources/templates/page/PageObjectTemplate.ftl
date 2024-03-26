@@ -1,4 +1,4 @@
-package ru.example.pages;
+package ru.itmo.pages;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;

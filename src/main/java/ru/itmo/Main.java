@@ -1,7 +1,7 @@
-package ru.example;
+package ru.itmo;
 
-import ru.example.generator.page.PageGenerator;
-import ru.example.generator.testcase.TestCaseGenerator;
+import ru.itmo.generator.page.PageGenerator;
+import ru.itmo.generator.testcase.TestCaseGenerator;
 
 public class Main {
     public static void main(String[] args) {

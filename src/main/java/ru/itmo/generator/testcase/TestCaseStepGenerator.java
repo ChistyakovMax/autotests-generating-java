@@ -1,6 +1,6 @@
-package ru.example.generator.testcase;
+package ru.itmo.generator.testcase;
 
-import ru.example.generator.TemplateGenerator;
+import ru.itmo.generator.TemplateGenerator;
 import utils.Prettier;
 import utils.testcase.step.TestCaseStep;
 import utils.testcase.step.TestCaseStepAction;
@@ -27,7 +27,7 @@ public class TestCaseStepGenerator {
             elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
             return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
         }
-        return null;
+        return "";
     }
 
     static String generateTestCaseStep(TestCaseStep step) throws Exception {
@@ -39,6 +39,7 @@ public class TestCaseStepGenerator {
         String templateAssertFilePathWithParameter = "testcase/teststep/assert/TestStepAssertTemplateWithParameter.ftl";
         String templateActionFilePath = "testcase/teststep/action/TestStepActionTemplate.ftl";
         String templateActionFilePathWithParameter = "testcase/teststep/action/TestStepActionTemplateWithParameter.ftl";
+        String templateGoToUrl = "/testcase/teststep/action/GoToUrlTemplate.ftl";
 
         TestCaseStepAssert testCaseStepAssert;
         TestCaseStepAction testCaseStepAction;
@@ -46,7 +47,7 @@ public class TestCaseStepGenerator {
         if(step.getTestStepType().equals(TestStepType.ASSERT)) {
             testCaseStepAssert = (TestCaseStepAssert) step;
             elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
-            elementsForTemplate.put("elementNameWithUpperCaseFirstLetter",Prettier.getElementNameWithUpperCaseFirstLetter(step.getElementName()));
+            elementsForTemplate.put("elementNameWithUpperCaseFirstLetter",Prettier.getNameWithUpperCaseFirstLetter(step.getElementName()));
             elementsForTemplate.put("assertType", asserts.get(testCaseStepAssert.getTestStepAssertType()));
             switch (testCaseStepAssert.getTestStepAssertType()) {
                 case EQUALS:
@@ -59,17 +60,28 @@ public class TestCaseStepGenerator {
         }
         else if (step.getTestStepType().equals(TestStepType.ACTION)) {
             testCaseStepAction = (TestCaseStepAction) step;
-            elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
-            elementsForTemplate.put("actionType", actions.get(testCaseStepAction.getTestStepActionType()));
-            elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getElementNameWithUpperCaseFirstLetter(step.getElementName()));
+
             switch (testCaseStepAction.getTestStepActionType()) {
-                case FILL:
-                    elementsForTemplate.put("parameter", testCaseStepAction.getFillingText());
-                    return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateActionFilePathWithParameter);
-                case GO_TO:
+                case GO_TO_PAGE:
+                    //TODO доделать логику перехода на страницу
                     elementsForTemplate.put("parameter", testCaseStepAction.getReachedUrl());
                     return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateActionFilePathWithParameter);
+
+                case GO_TO_URL:
+                    elementsForTemplate.put("url",  testCaseStepAction.getReachedUrl());
+                    return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateGoToUrl);
+
+                case FILL:
+                    elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
+                    elementsForTemplate.put("actionType", actions.get(testCaseStepAction.getTestStepActionType()));
+                    elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getNameWithUpperCaseFirstLetter(step.getElementName()));
+                    elementsForTemplate.put("parameter", testCaseStepAction.getFillingText());
+                    return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateActionFilePathWithParameter);
+
                 default:
+                    elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
+                    elementsForTemplate.put("actionType", actions.get(testCaseStepAction.getTestStepActionType()));
+                    elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getNameWithUpperCaseFirstLetter(step.getElementName()));
                     return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateActionFilePath);
             }
 
@@ -77,7 +89,7 @@ public class TestCaseStepGenerator {
         else throw new IllegalArgumentException("Unexpected value:" + step.getTestStepType());
     }
 
-    private static Map getAssertsHashMap() {
+    private static Map<TestStepAssertType, String> getAssertsHashMap() {
         Map<TestStepAssertType, String> asserts = new HashMap<>();
         asserts.put(IS_DISPLAYED, "isDisplayed");
         asserts.put(IS_NOT_DISPLAYED, "isNotDisplayed");
@@ -87,14 +99,26 @@ public class TestCaseStepGenerator {
         return asserts;
     }
 
-    private static Map getActionsHashMap() {
+    private static Map<TestStepActionType, String> getActionsHashMap() {
         Map<TestStepActionType, String> actions = new HashMap<>();
         actions.put(CLICK, "click");
         actions.put(DOUBLE_CLICK,"doubleClick");
         actions.put(FILL, "fill");
         actions.put(CLEAR,"clear");
-        actions.put(GO_TO,"goTo");
+        actions.put(GO_TO_URL,"goTo");
 
         return actions;
+    }
+
+    public static String generateInitOfPage(TestCaseStep step) throws Exception {
+        elementsForTemplate = new HashMap<>();
+        templateFilePath = "testcase/teststep/InitPage.ftl";
+
+        if (!step.getPageName().isEmpty()) {
+            elementsForTemplate.put("pageClassName", step.getPageName());
+            elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
+            return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
+        }
+        return "";
     }
 }

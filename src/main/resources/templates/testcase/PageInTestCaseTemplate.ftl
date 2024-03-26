@@ -1,1 +1,1 @@
-${pageClassName} ${pageName};
+    ${pageClassName}Page ${pageName}Page;

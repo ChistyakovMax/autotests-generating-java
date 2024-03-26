@@ -1,4 +1,4 @@
-package ru.example.freemarker;
+package ru.itmo.freemarker;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
