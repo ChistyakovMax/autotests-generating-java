@@ -9,7 +9,7 @@ import utils.pageobject.yaml.Page;
 import utils.pageobject.yaml.Pages;
 import utils.testcase.types.TestStepType;
 
-import static utils.Constants.basePageName;
+import static utils.Constants.BASE_PAGE_NAME;
 
 @Getter
 @Setter
@@ -58,7 +58,7 @@ public abstract class TestCaseStep {
         foundElement:
         for (Page page : pages.getPages()) {
             if (page.getPageName().equals(currentPageName)
-                    || page.getPageName().equals(basePageName)) {
+                    || page.getPageName().equals(BASE_PAGE_NAME)) {
                 for (Element element : page.getElements()) {
                     if (element.getElementName().contains(currentElementName)) {
                         isElementFound = true;

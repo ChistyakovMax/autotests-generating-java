@@ -17,8 +17,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static utils.Constants.basePageName;
-
+import static utils.Constants.BASE_PAGE_NAME;
 
 public class PageGenerator {
 
@@ -108,7 +107,7 @@ public class PageGenerator {
                 //генерация веб-элемента и добавление его в сет веб-элементов
                 webElements.add(webElementGenerator.generateWebElementByTemplate(element));
                 //генерация шагов для работы с веб-элементами и добавление их в сет шагов
-                steps.addAll(stepGenerator.generateStepsByTemplate(element, basePageName));
+                steps.addAll(stepGenerator.generateStepsByTemplate(element,BASE_PAGE_NAME));
             }
 
             String webElements = StringTransformer.transformToStringWithTwoEnters(this.webElements);
@@ -119,7 +118,7 @@ public class PageGenerator {
         }
         String basePageObject = TemplateGenerator.generateFromTemplate(elementsForTemplate, basePageTemplateFilePath);
         System.out.println(basePageObject);
-        FileCreator.createPageObjectClass(basePageObject, basePageName);
+        FileCreator.createPageObjectClass(basePageObject, BASE_PAGE_NAME);
     }
 
 }

@@ -2,22 +2,25 @@ package ru.itmo.generator.testcase;
 
 import ru.itmo.filewriter.FileCreator;
 import ru.itmo.generator.TemplateGenerator;
+import utils.Prettier;
 import utils.StringTransformer;
 import utils.testcase.TestCase;
 import utils.testcase.step.TestCaseStepAction;
 import utils.testcase.step.TestCaseStepAssert;
 import utils.testcase.step.TestCaseStep;
+import utils.testcase.step.TestCaseStepComment;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import static utils.Constants.ACTIONS;
+import static utils.Constants.ASSERTION;
+
 
 public class TestCaseGenerator {
 
-    private final String assertion = "ASSERT";
-    private final Set<String> actions = Set.of("CLICK", "DOUBLE_CLICK", "FILL", "CLEAR", "GO_TO_PAGE", "GO_TO_URL");
-    private final String exceptionMessage = "Строка должна начинаться с " + assertion + " либо " + actions + "!";
+    private final String exceptionMessage = "Строка должна начинаться с " + ASSERTION + " либо " + ACTIONS + "!";
     private final String testCaseTemplateFilePath = "testcase/TestCaseTemplate.ftl";
     private final String baseTestTemplateFilePath = "testcase/BaseTestTemplate.ftl";
     private Set<String> pages = new HashSet<>();
@@ -36,16 +39,21 @@ public class TestCaseGenerator {
         stepsFromFile = new LinkedList<>(Arrays.asList(fileContent.split("\\n")));
 
         //прислоение тест-кейсу имени
-        testCase.setName(stepsFromFile.get(0).trim().split(" ")[1]);
+        testCase.setName(Prettier.getNameWithUpperCaseFirstLetter(stepsFromFile.get(0).trim().split(" ")[1]));
         stepsFromFile.remove(0);
 
         //присвоение тест-кейсу списка шагов из теста
         for (String stepFromFile: stepsFromFile) {
+            //если комментарии - добавить
+            if(stepFromFile.startsWith("//")) {
+                testCaseSteps.add(new TestCaseStepComment(stepFromFile));
+                continue;
+            }
             stepFromFile = stepFromFile.trim();
             String testStepType = stepFromFile.split(" ")[0].toUpperCase();
-            if(assertion.equals(testStepType)) {
+            if(ASSERTION.equals(testStepType)) {
                 testCaseSteps.add(new TestCaseStepAssert(stepFromFile));
-            } else if(actions.contains(testStepType)) {
+            } else if(ACTIONS.contains(testStepType)) {
                 testCaseSteps.add(new TestCaseStepAction(stepFromFile));
             } else throw new IllegalArgumentException(exceptionMessage);
         }

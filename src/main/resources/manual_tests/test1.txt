@@ -1,6 +1,10 @@
-TestCase CheckTransitionToBunsSection
-click Main.signIn
-click Main.personalAccount
+TestCase userRegistration_InvalidPassword_GetError
 Go_to_url https://stellarburgers.nomoreparties.site/register
-click Registration.signInLink
-click Main.getOrder
+wait_for_element Registration.signUp
+fill Registration.name with Max
+fill Registration.email with testemail@gmail.com
+//Минимальный пароль — шесть символов
+fill Registration.password with 1234
+click Registration.signUp
+wait_for_element Registration.incorrectPasswordError
+Assert Registration.incorrectPasswordError equals Некорректный пароль

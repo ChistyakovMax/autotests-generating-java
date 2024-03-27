@@ -6,5 +6,6 @@ public enum TestStepActionType {
     FILL,
     CLEAR,
     GO_TO_URL,
-    GO_TO_PAGE
+    GO_TO_PAGE,
+    WAIT_FOR_ELEMENT
 }

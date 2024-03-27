@@ -27,6 +27,7 @@ public class TestCaseStepAction extends TestCaseStep {
                 break;
             case FILL:
                 fillingText = actionFromFile.split(" with ")[1];
+            case WAIT_FOR_ELEMENT:
             case CLICK:
             case DOUBLE_CLICK:
             case CLEAR:

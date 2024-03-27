@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 
 import static org.junit.Assert.*;
 
+@Getter
+@Accessors(fluent = true)
 public class ${pageName}Page extends BasePage {
 
     public ${pageName}Page(WebDriver driver) {
