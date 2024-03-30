@@ -11,15 +11,16 @@ import ru.itmo.pages.*;
 
 import java.time.Duration;
 
-@DisplayName("TestCase ${name}")
+@DisplayName("TestSuite ${name}")
 public class ${name}Test extends BaseTest {
 
     ${testCasePages}
 
-    @Test
-    @DisplayName("${name}")
-    public void testCase${name}() {
-        ${testCaseSteps}
+    @Before
+    public void start() {
+        ${beforeSteps}
     }
+
+    ${testCases}
 
 }

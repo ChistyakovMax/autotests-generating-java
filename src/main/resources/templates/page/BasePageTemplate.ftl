@@ -21,8 +21,10 @@ public abstract class BasePage {
             return currentUrl;
     }
 
-${webElements}
-${steps}
+    ${webElements}
+
+    ${steps}
+
     @Step("Проверка, что драйвер находится на текущей странице")
     public void assertCurrentPageIsRight() {
         assertTrue(driver.getCurrentUrl().contains(getCurrentUrl()));

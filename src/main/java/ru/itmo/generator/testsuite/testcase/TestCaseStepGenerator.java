@@ -1,4 +1,4 @@
-package ru.itmo.generator.testcase;
+package ru.itmo.generator.testsuite.testcase;
 
 import ru.itmo.generator.TemplateGenerator;
 import utils.Prettier;
@@ -13,16 +13,16 @@ import utils.testcase.types.TestStepType;
 import java.util.HashMap;
 import java.util.Map;
 
-import static utils.testcase.types.TestStepAssertType.*;
 import static utils.testcase.types.TestStepActionType.*;
+import static utils.testcase.types.TestStepAssertType.*;
 
 public class TestCaseStepGenerator {
     static Map<String, Object> elementsForTemplate;
     static String templateFilePath;
 
-    static String generatePageInTestCase(TestCaseStep step) throws Exception {
+    public static String generatePageInTestCase(TestCaseStep step) throws Exception {
         elementsForTemplate = new HashMap<>();
-        templateFilePath = "testcase/PageInTestCaseTemplate.ftl";
+        templateFilePath = "testsuite/testcase/PageInTestCaseTemplate.ftl";
 
         if (!step.getPageName().isEmpty()) {
             elementsForTemplate.put("pageClassName", Prettier.getNameWithUpperCaseFirstLetter(step.getPageName()));
@@ -32,17 +32,17 @@ public class TestCaseStepGenerator {
         return "";
     }
 
-    static String generateTestCaseStep(TestCaseStep step) throws Exception {
+    public static String generateTestCaseStep(TestCaseStep step) throws Exception {
         elementsForTemplate = new HashMap<>();
         Map<TestStepAssertType, String> asserts = getAssertsHashMap();
         Map<TestStepActionType, String> actions = getActionsHashMap();
 
-        String templateAssertFilePath = "testcase/teststep/assert/TestStepAssertTemplate.ftl";
-        String templateAssertFilePathWithParameter = "testcase/teststep/assert/TestStepAssertTemplateWithParameter.ftl";
-        String templateActionFilePath = "testcase/teststep/action/TestStepActionTemplate.ftl";
-        String templateActionFilePathWithParameter = "testcase/teststep/action/TestStepActionTemplateWithParameter.ftl";
-        String templateGoToUrl = "/testcase/teststep/action/GoToUrlTemplate.ftl";
-        String templateWaitForElement = "/testcase/teststep/WaitForElementTemplate.ftl";
+        String templateAssertFilePath = "testsuite/teststep/assert/TestStepAssertTemplate.ftl";
+        String templateAssertFilePathWithParameter = "testsuite/teststep/assert/TestStepAssertTemplateWithParameter.ftl";
+        String templateActionFilePath = "testsuite/teststep/action/TestStepActionTemplate.ftl";
+        String templateActionFilePathWithParameter = "testsuite/teststep/action/TestStepActionTemplateWithParameter.ftl";
+        String templateGoToUrl = "testsuite/teststep/action/GoToUrlTemplate.ftl";
+        String templateWaitForElement = "testsuite/teststep/WaitForElementTemplate.ftl";
 
         TestCaseStepAssert testCaseStepAssert;
         TestCaseStepAction testCaseStepAction;
@@ -121,7 +121,7 @@ public class TestCaseStepGenerator {
 
     public static String generateInitOfPage(TestCaseStep step) throws Exception {
         elementsForTemplate = new HashMap<>();
-        templateFilePath = "testcase/teststep/InitPageTemplate.ftl";
+        templateFilePath = "testsuite/teststep/InitPageTemplate.ftl";
 
         if (!step.getPageName().isEmpty()) {
             elementsForTemplate.put("pageClassName", step.getPageName());
@@ -129,5 +129,15 @@ public class TestCaseStepGenerator {
             return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
         }
         return "";
+    }
+
+    public static String generateInitOfPage(String page) throws Exception {
+        elementsForTemplate = new HashMap<>();
+        page = page.trim().replace(";", "");
+        templateFilePath = "testsuite/teststep/InitPageTemplate.ftl";
+
+        elementsForTemplate.put("pageClassName", page.split(" ")[0]);
+        elementsForTemplate.put("pageName", page.split(" ")[1]);
+        return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateFilePath);
     }
 }

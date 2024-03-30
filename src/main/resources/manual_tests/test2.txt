@@ -1,4 +1,4 @@
-TestSuite userRegistration
+TestSuite userRegistration2
 
 TestCase userRegistration_InvalidPassword_GetError
 Go_to_url https://stellarburgers.nomoreparties.site/register

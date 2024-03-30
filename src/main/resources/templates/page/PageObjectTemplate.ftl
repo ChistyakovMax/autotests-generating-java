@@ -1,6 +1,8 @@
 package ru.itmo.pages;
 
 import io.qameta.allure.Step;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,6 +18,7 @@ public class ${pageName}Page extends BasePage {
         currentUrl = baseUrl + "${additionalUrl}";
     }
 
-${webElements}
-${steps}
+    ${webElements}
+
+    ${steps}
 }

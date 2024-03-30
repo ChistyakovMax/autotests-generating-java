@@ -1,7 +1,7 @@
 package ru.itmo.generator.page;
 
 import org.yaml.snakeyaml.Yaml;
-import ru.itmo.filewriter.FileCreator;
+import ru.itmo.fileworker.FileWorker;
 import ru.itmo.generator.TemplateGenerator;
 import ru.itmo.generator.page.step.StepGenerator;
 import ru.itmo.generator.page.webelement.WebElementGenerator;
@@ -33,10 +33,10 @@ public class PageGenerator {
         Yaml yaml = new Yaml();
         InputStream iStream = this.getClass().getClassLoader().getResourceAsStream("pages/pages.yaml");
         Pages pages = yaml.loadAs(iStream, Pages.class);
-        for(Page page: pages.getPages()) {
+        for (Page page : pages.getPages()) {
             //для каждой страницы изменяем имя на соответствующее
             page.setPageName(Prettier.getNameWithUpperCaseFirstLetter(page.getPageName()));
-            for(Element element: page.getElements()) {
+            for (Element element : page.getElements()) {
                 //для каждого элемента изменяем имя на соответствующее
                 element.setElementName(Prettier.getElementNameForGenerate(element));
             }
@@ -70,8 +70,8 @@ public class PageGenerator {
                 steps.addAll(stepGenerator.generateStepsByTemplate(element, pageName));
             }
 
-            String webElements = StringTransformer.transformToStringWithTwoEnters(this.webElements);
-            String steps = StringTransformer.transformToStringWithTwoEnters(this.steps);
+            String webElements = StringTransformer.transformToString(this.webElements, 2, 0);
+            String steps = StringTransformer.transformToString(this.steps, 2, 0);
 
             elementsForTemplate.put("pageName", pageName);
             elementsForTemplate.put("webElements", webElements);
@@ -79,8 +79,7 @@ public class PageGenerator {
             elementsForTemplate.put("additionalUrl", additionalUrl);
 
             String pageObject = TemplateGenerator.generateFromTemplate(elementsForTemplate, pageObjectTemplateFilePath);
-            System.out.println(pageObject);
-            FileCreator.createPageObjectClass(pageObject, pageName);
+            FileWorker.createPageObjectClass(pageObject, pageName);
         }
     }
 
@@ -90,15 +89,15 @@ public class PageGenerator {
         steps.clear();
         elementsForTemplate.clear();
         elementsForTemplate.put("baseUrl", pages.getBaseUrl());
-        
-        for(Page page: pages.getPages()) {
-            if(page.getPageName().equals("Base")) {
+
+        for (Page page : pages.getPages()) {
+            if (page.getPageName().equals("Base")) {
                 basePage = page;
                 break;
             }
         }
 
-        if(basePage == null) {
+        if (basePage == null) {
             elementsForTemplate.put("webElements", "");
             elementsForTemplate.put("steps", "");
         } else {
@@ -107,18 +106,17 @@ public class PageGenerator {
                 //генерация веб-элемента и добавление его в сет веб-элементов
                 webElements.add(webElementGenerator.generateWebElementByTemplate(element));
                 //генерация шагов для работы с веб-элементами и добавление их в сет шагов
-                steps.addAll(stepGenerator.generateStepsByTemplate(element,BASE_PAGE_NAME));
+                steps.addAll(stepGenerator.generateStepsByTemplate(element, BASE_PAGE_NAME));
             }
 
-            String webElements = StringTransformer.transformToStringWithTwoEnters(this.webElements);
-            String steps = StringTransformer.transformToStringWithTwoEnters(this.steps);
+            String webElements = StringTransformer.transformToString(this.webElements, 2, 0);
+            String steps = StringTransformer.transformToString(this.steps, 2, 0);
 
             elementsForTemplate.put("webElements", webElements);
             elementsForTemplate.put("steps", steps);
         }
         String basePageObject = TemplateGenerator.generateFromTemplate(elementsForTemplate, basePageTemplateFilePath);
-        System.out.println(basePageObject);
-        FileCreator.createPageObjectClass(basePageObject, BASE_PAGE_NAME);
+        FileWorker.createPageObjectClass(basePageObject, BASE_PAGE_NAME);
     }
 
 }
