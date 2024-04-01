@@ -20,8 +20,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Chrome install
-        uses: browser-actions/setup-chrome@v1
+      - name: Start selenoid
+        uses: Xotabu4/selenoid-github-action@v2
       - name: Build with Maven
         run: mvn clean test
       - name: Copy History
