@@ -16,8 +16,10 @@ public abstract class BaseTest {
     public void setup() {
 
         //тест на Google Chrome
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
 
         driver.get("https://stellarburgers.nomoreparties.site/");
         driver.manage().window().maximize();
