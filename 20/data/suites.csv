@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Apr 05 13:28:09 GMT 2024","Fri Apr 05 13:28:12 GMT 2024","3117","","TestSuite UserProfile","","ru.itmo.UserProfileTest","testCaseClickPersonalAccountButtonRedirectedToProfilePage","TestCase ClickPersonalAccountButtonRedirectedToProfilePage",""
+"passed","Fri Apr 05 13:28:12 GMT 2024","Fri Apr 05 13:28:14 GMT 2024","1968","","TestSuite UserRegistration","","ru.itmo.UserRegistrationTest","testCaseUserRegistration_InvalidPassword_GetError","TestCase UserRegistration_InvalidPassword_GetError",""
+"passed","Fri Apr 05 13:27:36 GMT 2024","Fri Apr 05 13:28:09 GMT 2024","32603","","TestSuite UserProfile","","ru.itmo.UserProfileTest","testCaseClickConstructorRedirectedToMainPage","TestCase ClickConstructorRedirectedToMainPage",""
