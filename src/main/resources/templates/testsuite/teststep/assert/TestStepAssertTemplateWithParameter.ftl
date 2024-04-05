@@ -1,0 +1,1 @@
+${pageName}Page.assert${elementNameWithUpperCaseFirstLetter}${assertType}("${parameter}");

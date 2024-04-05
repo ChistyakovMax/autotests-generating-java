@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 public class Page {
     private String pageName;
+    private String additionalUrl;
     private List<Element> elements;
 
 }

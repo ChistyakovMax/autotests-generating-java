@@ -1,0 +1,31 @@
+TestSuite userProfile
+
+TestCase clickPersonalAccountButtonRedirectedToProfilePage
+Go_to_page Login
+wait_for_element Login.signIn
+//ввести креды
+fill Login.email with chistyakovmaxim2000@gmail.com
+fill Login.password with Password1234!
+click Login.signIn
+//потом перейти на главную страницу
+wait_for_element Main.getOrder
+//а с главной страницы перейти в Профиль
+click Main.personalAccount
+wait_for_element Profile.profileLink
+Assert Profile is_current_page
+
+TestCase clickConstructorRedirectedToMainPage
+Go_to_url https://stellarburgers.nomoreparties.site/login
+wait_for_element Login.signIn
+//ввести креды
+fill Login.email with chistyakovmaxim2000@gmail.com
+fill Login.password with Password1234!
+click Login.signIn
+//потом перейти на главную страницу
+wait_for_element Main.getOrder
+//а с главной страницы перейти в Профиль
+click Main.personalAccount
+wait_for_element Profile.profileLink
+click Profile.constructor
+wait_for_element Main.getOrder
+Assert https://stellarburgers.nomoreparties.site/ is_current_url
