@@ -37,11 +37,17 @@ public class TestCaseStepGenerator {
         Map<TestStepAssertType, String> asserts = getAssertsHashMap();
         Map<TestStepActionType, String> actions = getActionsHashMap();
 
+        //шаблоны Ассертов
         String templateAssertFilePath = "testsuite/teststep/assert/TestStepAssertTemplate.ftl";
         String templateAssertFilePathWithParameter = "testsuite/teststep/assert/TestStepAssertTemplateWithParameter.ftl";
+        String templateAssertPageIsOpened = "testsuite/teststep/assert/TestStepAssertPageIsOpened.ftl";
+        String templateAssertURLIsOpened = "testsuite/teststep/assert/TestStepAssertURLIsOpened.ftl";
+
+        //шаблоны Действий
         String templateActionFilePath = "testsuite/teststep/action/TestStepActionTemplate.ftl";
         String templateActionFilePathWithParameter = "testsuite/teststep/action/TestStepActionTemplateWithParameter.ftl";
         String templateGoToUrl = "testsuite/teststep/action/GoToUrlTemplate.ftl";
+        String templateGoToPage = "testsuite/teststep/action/GoToPageTemplate.ftl";
         String templateWaitForElement = "testsuite/teststep/WaitForElementTemplate.ftl";
 
         TestCaseStepAssert testCaseStepAssert;
@@ -50,14 +56,24 @@ public class TestCaseStepGenerator {
 
         if (step.getTestStepType().equals(TestStepType.ASSERT)) {
             testCaseStepAssert = (TestCaseStepAssert) step;
-            elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
-            elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getNameWithUpperCaseFirstLetter(step.getElementName()));
             elementsForTemplate.put("assertType", asserts.get(testCaseStepAssert.getTestStepAssertType()));
             switch (testCaseStepAssert.getTestStepAssertType()) {
                 case EQUALS:
+                    elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
+                    elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getNameWithUpperCaseFirstLetter(step.getElementName()));
                     elementsForTemplate.put("parameter", testCaseStepAssert.getExpectedText());
                     return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateAssertFilePathWithParameter);
+
+                case IS_CURRENT_PAGE:
+                    elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
+                    return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateAssertPageIsOpened);
+
+                case IS_CURRENT_URL:
+                    elementsForTemplate.put("URL", ((TestCaseStepAssert) step).getExpectedUrl());
+                    return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateAssertURLIsOpened);
                 default:
+                    elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
+                    elementsForTemplate.put("elementNameWithUpperCaseFirstLetter", Prettier.getNameWithUpperCaseFirstLetter(step.getElementName()));
                     return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateAssertFilePath);
             }
 
@@ -66,9 +82,8 @@ public class TestCaseStepGenerator {
 
             switch (testCaseStepAction.getTestStepActionType()) {
                 case GO_TO_PAGE:
-                    //TODO доделать логику перехода на страницу
-                    elementsForTemplate.put("parameter", testCaseStepAction.getReachedUrl());
-                    return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateActionFilePathWithParameter);
+                    elementsForTemplate.put("pageName", Prettier.getElementNameWithLowerCaseFirstLetter(step.getPageName()));
+                    return TemplateGenerator.generateFromTemplate(elementsForTemplate, templateGoToPage);
 
                 case GO_TO_URL:
                     elementsForTemplate.put("url", testCaseStepAction.getReachedUrl());

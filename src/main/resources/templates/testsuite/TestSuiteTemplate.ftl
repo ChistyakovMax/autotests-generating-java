@@ -11,6 +11,8 @@ import ru.itmo.pages.*;
 
 import java.time.Duration;
 
+import static org.junit.Assert.assertTrue;
+
 @DisplayName("TestSuite ${name}")
 public class ${name}Test extends BaseTest {
 

@@ -46,6 +46,27 @@ public abstract class TestCaseStep {
         }
     }
 
+    protected String getPageNameGoToOrIsCurrent(String step) {
+        boolean isPageFound = false;
+        Pages pages = new PageGenerator().getPagesFromYAML();
+        String currentPageName = Prettier
+                .getNameWithUpperCaseFirstLetter
+                        (step.split(" ")[1]);
+
+        for (Page page : pages.getPages()) {
+            if (page.getPageName().equals(currentPageName)) {
+                isPageFound = true;
+                break;
+            }
+        }
+
+        if (isPageFound) {
+            return currentPageName;
+        } else {
+            throw new IllegalArgumentException("Страницы " + currentPageName + "не существует в YAML файле!");
+        }
+    }
+
     protected String getElementName(String step) {
         String currentPageName = getPageName(step);
         pageAndElement = getPageAndElement(step);
@@ -55,10 +76,11 @@ public abstract class TestCaseStep {
                 .getElementNameWithLowerCaseFirstLetter
                         (pageAndElement.split("\\.")[1]);
 
+        //сначала надо искать элементы по страницам, кроме Base
         foundElement:
         for (Page page : pages.getPages()) {
             if (page.getPageName().equals(currentPageName)
-                    || page.getPageName().equals(BASE_PAGE_NAME)) {
+                    || !page.getPageName().equals(BASE_PAGE_NAME)) {
                 for (Element element : page.getElements()) {
                     if (element.getElementName().contains(currentElementName)) {
                         isElementFound = true;
@@ -68,6 +90,20 @@ public abstract class TestCaseStep {
                 }
             }
         }
+        //потом в самой Base
+        foundElementBasePage:
+        for (Page page : pages.getPages()) {
+            if (page.getPageName().equals(BASE_PAGE_NAME)) {
+                for (Element element : page.getElements()) {
+                    if (element.getElementName().contains(currentElementName)) {
+                        isElementFound = true;
+                        currentElementName = element.getElementName();
+                        break foundElementBasePage;
+                    }
+                }
+            }
+        }
+
 
         if (isElementFound) {
             return currentElementName;

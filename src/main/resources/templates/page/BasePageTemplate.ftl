@@ -1,12 +1,16 @@
 package ru.itmo.pages;
 
 import io.qameta.allure.Step;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static org.junit.Assert.*;
 
+@Getter
+@Accessors(fluent = true)
 public abstract class BasePage {
 
     WebDriver driver;
@@ -26,7 +30,7 @@ public abstract class BasePage {
     ${steps}
 
     @Step("Проверка, что драйвер находится на текущей странице")
-    public void assertCurrentPageIsRight() {
+    public void assertCurrentPageIsOpened() {
         assertTrue(driver.getCurrentUrl().contains(getCurrentUrl()));
     }
 }

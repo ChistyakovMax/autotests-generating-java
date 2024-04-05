@@ -31,6 +31,10 @@ public class TestCaseStepAssert extends TestCaseStep {
             case IS_CURRENT_URL:
                 expectedUrl = assertFromFile.split(" ")[1].toLowerCase();
                 break;
+
+            case IS_CURRENT_PAGE:
+                pageName = getPageNameGoToOrIsCurrent(assertFromFile);
+                break;
             default:
                 throw new IllegalArgumentException("Unexpected value: " + testStepAssertType);
         }

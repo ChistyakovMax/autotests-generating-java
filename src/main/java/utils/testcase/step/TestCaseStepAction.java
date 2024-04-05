@@ -25,6 +25,9 @@ public class TestCaseStepAction extends TestCaseStep {
             case GO_TO_URL:
                 reachedUrl = actionFromFile.split(" ")[1];
                 break;
+            case GO_TO_PAGE:
+                pageName = getPageNameGoToOrIsCurrent(actionFromFile);
+                break;
             case FILL:
                 fillingText = actionFromFile.split(" with ")[1];
             case WAIT_FOR_ELEMENT:

@@ -1,0 +1,1 @@
+assertTrue(driver.getCurrentUrl().contains("${URL}"));
