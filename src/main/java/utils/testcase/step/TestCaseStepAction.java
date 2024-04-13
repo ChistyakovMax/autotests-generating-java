@@ -14,11 +14,6 @@ public class TestCaseStepAction extends TestCaseStep {
     private String reachedUrl = "";
 
     public TestCaseStepAction(String actionFromFile) {
-        //Click SearchScreen.searchBar
-        //fill SearchScreen.searchBar with Test text
-        //double_click SearchScreen.searchBar
-        //clear SearchScreen.searchBar
-        //Go_to https://something.com
         testStepType = TestStepType.ACTION;
         testStepActionType = TestStepActionType.valueOf(actionFromFile.split(" ")[0].toUpperCase());
         switch (testStepActionType) {
