@@ -2,6 +2,7 @@ package ru.itmo.generator.testsuite.testcase;
 
 import ru.itmo.fileworker.FileWorker;
 import ru.itmo.generator.TemplateGenerator;
+import ru.itmo.generator.page.PageGenerator;
 import utils.Prettier;
 import utils.StringTransformer;
 import utils.testcase.TestCase;
@@ -83,9 +84,11 @@ public class TestCaseGenerator {
     }
 
     public static void generateBaseTest() throws Exception {
-        String baseTestName = "Base";
+        String baseUrl = new PageGenerator().getPagesFromYAML().getBaseUrl();
+        elementsForTemplate = new HashMap<>();
+        elementsForTemplate.put("baseUrl", baseUrl);
         String baseTest = TemplateGenerator
-                .generateFromTemplate(baseTestTemplateFilePath);
-        FileWorker.createTestSuiteClass(baseTest, baseTestName);
+                .generateFromTemplate(elementsForTemplate, baseTestTemplateFilePath);
+        FileWorker.createTestSuiteClass(baseTest, BASE_TEST_NAME);
     }
 }

@@ -28,7 +28,7 @@ public abstract class BaseTest {
         //driver = new ChromeDriver(options);
         driver = new RemoteWebDriver(new URL(remoteUrlChrome), options);
 
-        driver.get("${baseUrl}");
+        driver.get("https://stellarburgers.nomoreparties.site/");
         driver.manage().window().maximize();
     }
 

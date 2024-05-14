@@ -14,9 +14,6 @@ public class TestCaseStepAssert extends TestCaseStep {
     private String expectedUrl = "";
 
     public TestCaseStepAssert(String assertFromFile) {
-        //Assert SearchScreen.cancel is_displayed
-        //Assert SearchResultScreen.searchText equals t-shirt
-        //Assert https://something.com is_current_url
         testStepType = TestStepType.ASSERT;
         testStepAssertType = TestStepAssertType.valueOf(assertFromFile.split(" ")[2].toUpperCase());
         switch (testStepAssertType) {
