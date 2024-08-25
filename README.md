@@ -10,4 +10,5 @@
 ![image](https://github.com/user-attachments/assets/aa1e4b85-62d0-4635-8dd0-c0938d891291)
 
 4.  <b>После запуска выполняется автоматическая генерация Allure-отчёта.</b>
-![image](https://github.com/user-attachments/assets/f61c6acd-8aa6-461d-8777-1a2650c52a1e)
+![image](https://github.com/user-attachments/assets/4c79ed87-9fac-4c75-ac71-fc39bf610566)
+
